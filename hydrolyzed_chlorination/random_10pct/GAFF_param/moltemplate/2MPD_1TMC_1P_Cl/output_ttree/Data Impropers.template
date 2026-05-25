@@ -1,0 +1,16 @@
+$/improper:bytype1 @/improper:GAFF/X-X-c-o $/atom:mpd2_tmc/N1 $/atom:mpd2_tmc/C7 $/atom:mpd2_tmc/C6 $/atom:mpd2_tmc/O
+$/improper:bytype2 @/improper:GAFF/X-X-c-o $/atom:mpd2_tmc/C9 $/atom:mpd2_tmc/O3 $/atom:mpd2_tmc/C14 $/atom:mpd2_tmc/N2
+$/improper:bytype3 @/improper:GAFF/X-X-c-o $/atom:mpd2_tmc/C11 $/atom:mpd2_tmc/O1 $/atom:mpd2_tmc/C13 $/atom:mpd2_tmc/O2
+$/improper:bytype4 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C $/atom:mpd2_tmc/C2 $/atom:mpd2_tmc/C1 $/atom:mpd2_tmc/H
+$/improper:bytype5 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C1 $/atom:mpd2_tmc/C3 $/atom:mpd2_tmc/C $/atom:mpd2_tmc/H2
+$/improper:bytype6 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C1 $/atom:mpd2_tmc/C4 $/atom:mpd2_tmc/C2 $/atom:mpd2_tmc/H1
+$/improper:bytype7 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C3 $/atom:mpd2_tmc/C4 $/atom:mpd2_tmc/C5 $/atom:mpd2_tmc/H3
+$/improper:bytype8 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C7 $/atom:mpd2_tmc/C9 $/atom:mpd2_tmc/C8 $/atom:mpd2_tmc/H5
+$/improper:bytype9 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C7 $/atom:mpd2_tmc/C11 $/atom:mpd2_tmc/C12 $/atom:mpd2_tmc/H6
+$/improper:bytype10 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C9 $/atom:mpd2_tmc/C11 $/atom:mpd2_tmc/C10 $/atom:mpd2_tmc/H7
+$/improper:bytype11 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C15 $/atom:mpd2_tmc/C17 $/atom:mpd2_tmc/C16 $/atom:mpd2_tmc/H10
+$/improper:bytype12 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C15 $/atom:mpd2_tmc/C19 $/atom:mpd2_tmc/C20 $/atom:mpd2_tmc/H13
+$/improper:bytype13 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C17 $/atom:mpd2_tmc/C19 $/atom:mpd2_tmc/C18 $/atom:mpd2_tmc/H11
+$/improper:bytype14 @/improper:GAFF/X-X-ca-ha $/atom:mpd2_tmc/C18 $/atom:mpd2_tmc/C20 $/atom:mpd2_tmc/C19 $/atom:mpd2_tmc/H12
+$/improper:bytype15 @/improper:GAFF/X-X-n-hn $/atom:mpd2_tmc/C3 $/atom:mpd2_tmc/C6 $/atom:mpd2_tmc/N1 $/atom:mpd2_tmc/H4
+$/improper:bytype16 @/improper:GAFF/X-X-n-hn $/atom:mpd2_tmc/C14 $/atom:mpd2_tmc/C15 $/atom:mpd2_tmc/N2 $/atom:mpd2_tmc/H9

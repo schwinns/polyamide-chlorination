@@ -1,0 +1,54 @@
+pair_coeff 1 1 lj/charmm/coul/long 0.0860 3.39966950842 # OPLS
+pair_coeff 2 2 lj/charmm/coul/long 0.0860 3.39966950842 # OPLS
+pair_coeff 3 3 lj/charmm/coul/long 0.0150 2.59964245953 # Spellmeyer
+pair_coeff 4 4 lj/charmm/coul/long 0.0157 1.06907846177 # !Ferguson base pair geom.
+pair_coeff 5 5 lj/charmm/coul/long 0.0000 0.0 # OPLS Jorgensen, JACS,110,(1988),1657
+pair_coeff 6 6 lj/charmm/coul/long 0.265 3.47094140587 # Fox, JPCB,102,8070,(98),flex.mdl CHCl3
+pair_coeff 7 7 lj/charmm/coul/long 0.1700 3.24999852378 # OPLS
+pair_coeff 8 8 lj/charmm/coul/long 0.1700 3.24999852378 # OPLS
+pair_coeff 9 9 lj/charmm/coul/long 0.2100 2.95992190115 # OPLS
+pair_coeff 10 10 lj/charmm/coul/long 0.2104 3.06647338784 # OPLS
+bond_coeff 1 harmonic 478.4 1.3870 # SOURCE1 6228 0.0147
+bond_coeff 2 harmonic 344.3 1.0870 # SOURCE3 1496 0.0045
+bond_coeff 3 harmonic 372.3 1.4220 # SOURCE3 9 0.0098
+bond_coeff 4 harmonic 449.0 1.3640 # SOURCE1 137 0.0085
+bond_coeff 5 harmonic 349.7 1.4870 # SOURCE1 480 0.0055
+bond_coeff 6 harmonic 293.5 1.7660 # SOURCE3 6 0.0250
+bond_coeff 7 harmonic 303.2 1.7630 # SOURCE3 1 0.0000
+bond_coeff 8 harmonic 478.2 1.3450 # SOURCE1 1235 0.0215
+bond_coeff 9 harmonic 648.0 1.2140 # SOURCE1 3682 0.0165
+bond_coeff 10 harmonic 466.4 1.3060 # SOURCE1 271 0.0041
+bond_coeff 11 harmonic 410.2 1.0090 # SOURCE3 149 0.0098
+bond_coeff 12 harmonic 401.2 1.0140 # SOURCE3 209 0.0091
+bond_coeff 13 harmonic 369.6 0.9740 # SOURCE3 367 0.0105
+angle_coeff 1 harmonic 67.18 119.97 # SOURCE3 1969 0.3480
+angle_coeff 2 harmonic 48.46 120.01 # SOURCE3 2980 0.2511
+angle_coeff 3 harmonic 67.97 119.89 # SOURCE3 18 0.2095
+angle_coeff 4 harmonic 69.34 120.13 # SOURCE3 193 0.6341
+angle_coeff 5 harmonic 64.64 120.14 # SOURCE3 40 0.4788
+angle_coeff 6 harmonic 68.47 115.14 # SOURCE4 571 1.4648
+angle_coeff 7 harmonic 68.67 123.44 # SOURCE3 18 2.5574
+angle_coeff 8 harmonic 70.11 113.44 # SOURCE4 222 0.8421
+angle_coeff 9 harmonic 59.78 121.51 # SOURCE3 6 1.6987
+angle_coeff 10 harmonic 75.83 122.03 # SOURCE3 221 2.3565
+angle_coeff 11 harmonic 77.38 122.88 # SOURCE3 33 2.1896
+angle_coeff 12 harmonic 47.36 115.94 # SOURCE4 537 1.8890
+angle_coeff 13 harmonic 64.29 123.71 # SOURCE3 10 3.8159
+angle_coeff 14 harmonic 49.21 118.46 # SOURCE3 157 2.4094
+angle_coeff 15 harmonic 57.67 113.15 # SOURCE3 1 0.0000
+angle_coeff 16 harmonic 49.08 116.13 # SOURCE4 1780 1.2853
+angle_coeff 17 harmonic 40.07 104.14 # SOURCE3 1 0.0000
+angle_coeff 18 harmonic 40.05 114.85 # SOURCE4 1108 2.0811
+angle_coeff 19 harmonic 51.19 107.37 # SOURCE3 34 1.6830
+angle_coeff 20 harmonic 78.17 130.38 # SOURCE4 429 1.0315
+dihedral_coeff 1 fourier 1 1.0 2 180.0 # optimized by Junmei Wang, Jan-2013
+dihedral_coeff 2 fourier 1 2.5 2 180.0 # AA,NMA (no c-n3, c-n4, c-nh)
+dihedral_coeff 3 fourier 1 2.3 2 180.0 # Junmei et al, 1999
+dihedral_coeff 4 fourier 1 3.625 2 180.0 # intrpol.bsd.on C6H6
+dihedral_coeff 5 fourier 1 0.45 2 180.0 #
+dihedral_coeff 6 fourier 1 1.05 2 180.0 #
+dihedral_coeff 7 fourier 2 2.5 2 180.0 2.0 1 0.0 # JCC,7,(1986),230
+dihedral_coeff 8 fourier 2 2.3 2 180.0 1.9 1 0.0 # Junmei et al, 1999
+improper_coeff 1 cvff 10.5 -1 2 # JCC,7,(1986),230
+improper_coeff 2 cvff 1.1 -1 2 # bsd.on C6H6 nmodes
+improper_coeff 3 cvff 1.1 -1 2 # JCC,7,(1986),230
