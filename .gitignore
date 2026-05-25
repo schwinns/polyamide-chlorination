@@ -11,6 +11,10 @@
 *.log
 *.cpt
 
+# ignore the build iterations
+*iter*gro
+*iter*tpr
+
 # ignore test notebooks
 test*.ipynb
 
