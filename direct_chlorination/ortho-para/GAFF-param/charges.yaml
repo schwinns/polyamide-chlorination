@@ -1,0 +1,1180 @@
+# Carbon positions on MPD ring
+#        _1_
+# hn2a  4    2  hn1a
+#  |    |    |   |
+#  N2 - 5_  _3 - N1
+#  |      6      |
+# hn2b          hn1b
+#
+# Carbon positions on TMC ring
+#        C1
+#        |
+#       _1_
+#      4    2
+#      |    |
+#   C3-5_  _3-C2
+#        6
+
+---
+MPD_L: # charges pulled from OpenEye AM1-BCC ELF10, 2 TMC-T-2P on either side of MPD-L
+  ha1:
+    element: H
+    charge: 0.14181
+  ca1:
+    element: C
+    charge: -0.08205001
+  ca2:
+    element: C
+    charge: -0.17455
+  ha2:
+    element: H
+    charge: 0.17558999
+  ca3:
+    element: C
+    charge: 0.09408000
+  N1:
+    element: N
+    charge: -0.46721000
+  hn1a:
+    element: H
+    charge: 0.31907001
+  ca6:
+    element: C
+    charge: -0.23816000
+  ha6:
+    element: H
+    charge: 0.12763999
+  ca5:
+    element: C
+    charge: 0.09408000
+  N2:
+    element: N
+    charge: -0.46721000
+  hn2a:
+    element: H
+    charge: 0.31907001
+  ca4:
+    element: C
+    charge: -0.17455
+  ha4:
+    element: H
+    charge: 0.17558999
+
+MPD_L_Cl: # charges pulled from OpenEye AM1-BCC ELF10, 2 TMC-T-2P on either side of MPD-L; kept MPD-L charges same, but changed the marked atoms to account for Cl presence (same parameterization but with Cl at ha6)
+  ha1:
+    element: H
+    charge: 0.14181
+  ca1:
+    element: C
+    charge: -0.08205001
+  ca2:
+    element: C
+    charge: -0.17455
+  ha2:
+    element: H
+    charge: 0.17558999
+  ca3: # edited for Cl
+    element: C
+    charge: 0.10823
+  N1:
+    element: N
+    charge: -0.46721000
+  hn1a: # edited for Cl
+    element: H
+    charge: 0.33043
+  ca6: # edited for Cl
+    element: C
+    charge: -0.09627
+  cl: # changed to Cl
+    element: Cl
+    charge: -0.10763
+  ca5: # edited for Cl
+    element: C
+    charge: 0.10823
+  N2:
+    element: N
+    charge: -0.46721000
+  hn2a: # edited for Cl
+    element: H
+    charge: 0.33043
+  ca4:
+    element: C
+    charge: -0.17455
+  ha4:
+    element: H
+    charge: 0.17558999
+
+MPD_T: # charges pulled from OpenEye AM1-BCC ELF10, 2 MPD-T on either side of TMC-L-P
+  ha1: 
+    element: H
+    charge: 0.13486999
+  ca1:
+    element: C
+    charge: -0.06949000
+  ca2:
+    element: C
+    charge: -0.19186001
+  ha2:
+    element: H
+    charge: 0.17089000
+  ca3: # on side of crosslinked N
+    element: C
+    charge: 0.10211000
+  N1: # crosslinked N
+    element: N
+    charge: -0.46871001
+  hn1a:
+    element: H
+    charge: 0.31683999
+  ca6:
+    element: C
+    charge: -0.24835999
+  ha6:
+    element: H
+    charge: 0.12774000
+  ca5:
+    element: C
+    charge: 0.16722000
+  N2:
+    element: N
+    charge: -0.82321000
+  hn2a:
+    element: H
+    charge: 0.39148000
+  hn2b:
+    element: H
+    charge: 0.39148000
+  ca4:
+    element: C
+    charge: -0.21183001
+  ha4:
+    element: H
+    charge: 0.13387001
+
+TMC_L_P_1: # charges pulled from OpenEye AM1-BCC ELF10, TMC-L-P between 2 MPD-T, terminated C is C1
+  ca1:
+    element: C
+    charge: -0.14004999
+  C1: # terminated C
+    element: C
+    charge: 0.65267998
+  O1:
+    element: O
+    charge: -0.52929002
+  oh1:
+    element: O
+    charge: -0.60725999
+  ho1:
+    element: H
+    charge: 0.44815001
+  ca2: 
+    element: C
+    charge: -0.04120000
+  ha2:
+    element: H
+    charge: 0.15819000
+  ca3:
+    element: C
+    charge: -0.15997000
+  C2: # crosslinked C
+    element: C
+    charge: 0.68264002
+  O2:
+    element: O
+    charge: -0.57046998
+  ca4:
+    element: C
+    charge: -0.04120000
+  ha4:
+    element: H
+    charge: 0.15819000
+  ca5: 
+    element: C
+    charge: -0.15997000
+  C3: # crosslinked C
+    element: C
+    charge: 0.68264002
+  O3:
+    element: O
+    charge: -0.57046998
+  ca6:
+    element: C
+    charge: 0.00277000
+  ha6:
+    element: H
+    charge: 0.18854000
+
+TMC_L_P_2: # charges pulled from OpenEye AM1-BCC ELF10, TMC-L-P between 2 MPD-T, terminated C is C2
+  ca1:
+    element: C
+    charge: -0.15997000
+  C1: # crosslinked C
+    element: C
+    charge: 0.68264002
+  O1:
+    element: O
+    charge: -0.57046998
+  ca2: 
+    element: C
+    charge: -0.04120000
+  ha2:
+    element: H
+    charge: 0.15819000
+  ca3:
+    element: C
+    charge: -0.14004999
+  C2: # terminated C
+    element: C
+    charge: 0.65267998
+  O2:
+    element: O
+    charge: -0.52929002
+  oh2:
+    element: O
+    charge: -0.60725999
+  ho2: 
+    element: H
+    charge: 0.44815001
+  ca4:
+    element: C
+    charge: 0.00277000
+  ha4:
+    element: H
+    charge: 0.18854000
+  ca5: 
+    element: C
+    charge: -0.15997000
+  C3: # crosslinked C
+    element: C
+    charge: 0.68264002
+  O3:
+    element: O
+    charge: -0.57046998
+  ca6:
+    element: C
+    charge: -0.04120000
+  ha6:
+    element: H
+    charge: 0.15819000
+
+TMC_L_P_3: # charges pulled from OpenEye AM1-BCC ELF10, TMC-L-P between 2 MPD-T, terminated C is C3
+  ca1:
+    element: C
+    charge: -0.15997000
+  C1: # crosslinked C
+    element: C
+    charge: 0.68264002
+  O1:
+    element: O
+    charge: -0.57046998
+  ca2: 
+    element: C
+    charge: 0.00277000
+  ha2:
+    element: H
+    charge: 0.18854000
+  ca3:
+    element: C
+    charge: -0.15997000
+  C2: # crosslinked C
+    element: C
+    charge: 0.68264002
+  O2:
+    element: O
+    charge: -0.57046998
+  ca4:
+    element: C
+    charge: -0.04120000
+  ha4:
+    element: H
+    charge: 0.15819000
+  ca5: 
+    element: C
+    charge: -0.14004999
+  C3: # terminated C
+    element: C
+    charge: 0.65267998
+  O3:
+    element: O
+    charge: -0.52929002
+  oh3: 
+    element: O
+    charge: -0.60725999
+  ho3:
+    element: H
+    charge: 0.44815001
+  ca6:
+    element: C
+    charge: -0.04120000
+  ha6:
+    element: H
+    charge: 0.15819000
+
+TMC_L_D_1: # charges pulled from OpenEye AM1-BCC ELF10, TMC-L-P between 2 MPD-T, terminated C is C1
+  ca1:
+    element: C
+    charge: -0.14158000
+  C1: # terminated C
+    element: C
+    charge: 0.91183001
+  O1:
+    element: O
+    charge: -0.81760001
+  O4: # deprotonated O
+    element: O
+    charge: -0.81760001
+  ca2: 
+    element: C
+    charge: -0.05731000
+  ha2:
+    element: H
+    charge: 0.16676999
+  ca3:
+    element: C
+    charge: -0.18829000
+  C2: # crosslinked C
+    element: C
+    charge: 0.69394999
+  O2:
+    element: O
+    charge: -0.59794998
+  ca4:
+    element: C
+    charge: -0.05731000
+  ha4:
+    element: H
+    charge: 0.16676999
+  ca5: 
+    element: C
+    charge: -0.18829000
+  C3: # crosslinked C
+    element: C
+    charge: 0.69394999
+  O3:
+    element: O
+    charge: -0.59794998
+  ca6:
+    element: C
+    charge: -0.06301000
+  ha6:
+    element: H
+    charge: 0.14560000
+
+TMC_L_D_2: # charges pulled from OpenEye AM1-BCC ELF10, TMC-L-P between 2 MPD-T, terminated C is C2
+  ca1:
+    element: C
+    charge: -0.18829000
+  C1: # crosslinked C
+    element: C
+    charge: 0.69394999
+  O1:
+    element: O
+    charge: -0.59794998
+  ca2: 
+    element: C
+    charge: -0.05731000
+  ha2:
+    element: H
+    charge: 0.16676999
+  ca3:
+    element: C
+    charge: -0.14158000
+  C2: # terminated C
+    element: C
+    charge: 0.91183001
+  O2:
+    element: O
+    charge: -0.81760001
+  O4: # deprotonated O
+    element: O
+    charge: -0.81760001
+  ca4:
+    element: C
+    charge: -0.06301000
+  ha4:
+    element: H
+    charge: 0.14560000
+  ca5: 
+    element: C
+    charge: -0.18829000
+  C3: # crosslinked C
+    element: C
+    charge: 0.69394999
+  O3:
+    element: O
+    charge: -0.59794998
+  ca6:
+    element: C
+    charge: -0.05731000
+  ha6:
+    element: H
+    charge: 0.16676999
+
+TMC_L_D_3: # charges pulled from OpenEye AM1-BCC ELF10, TMC-L-D between 2 MPD-T, terminated C is C3
+  ca1:
+    element: C
+    charge: -0.18829000
+  C1: # crosslinked C
+    element: C
+    charge: 0.69394999
+  O1:
+    element: O
+    charge: -0.59794998
+  ca2: 
+    element: C
+    charge: -0.06301000
+  ha2:
+    element: H
+    charge: 0.14560000
+  ca3:
+    element: C
+    charge: -0.18829000
+  C2: # crosslinked C
+    element: C
+    charge: 0.69394999
+  O2:
+    element: O
+    charge: -0.59794998
+  ca4:
+    element: C
+    charge: -0.05731000
+  ha4:
+    element: H
+    charge: 0.16676999
+  ca5: 
+    element: C
+    charge: -0.14158000
+  C3: # terminated C
+    element: C
+    charge: 0.91183001
+  O3:
+    element: O
+    charge: -0.81760001
+  O4: 
+    element: O
+    charge: -0.81760001
+  ca6:
+    element: C
+    charge: -0.05731000
+  ha6:
+    element: H
+    charge: 0.16676999
+
+TMC_T_2P_1: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-2P, crosslinked C is C1
+  ca1:
+    element: C
+    charge: -0.17337001
+  C1: # crosslinked C
+    element: C
+    charge: 0.68373000
+  O1:
+    element: O
+    charge: -0.57339001
+  ca2: 
+    element: C
+    charge: -0.00762000
+  ha2:
+    element: H
+    charge: 0.17549000
+  ca3:
+    element: C
+    charge: -0.15591000
+  C2: # terminated C
+    element: C
+    charge: 0.65314000
+  O2:
+    element: O
+    charge: -0.53921998
+  oh2:
+    element: O
+    charge: -0.60354001
+  ho2:
+    element: H
+    charge: 0.45265001
+  ca4: 
+    element: C
+    charge: -0.00762000
+  ha4:
+    element: H
+    charge: 0.17549000
+  ca5: 
+    element: C
+    charge: -0.15591000
+  C3: # terminated C
+    element: C
+    charge: 0.65314000
+  O3:
+    element: O
+    charge: -0.53921998
+  oh3:
+    element: O
+    charge: -0.60354001
+  ho3:
+    element: H
+    charge: 0.45265001
+  ca6:
+    element: C
+    charge: 0.00829000
+  ha6:
+    element: H
+    charge: 0.18316000
+
+TMC_T_2P_2: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-2P, crosslinked C is C2
+  ca1:
+    element: C
+    charge: -0.15591000
+  C1: # terminated C
+    element: C
+    charge: 0.65314000
+  O1:
+    element: O
+    charge: -0.53921998
+  oh1:
+    element: O
+    charge: -0.60354001
+  ho1:
+    element: H
+    charge: 0.45265001
+  ca2:
+    element: C
+    charge: -0.00762000
+  ha2:
+    element: H
+    charge: 0.17549000
+  ca3:
+    element: C
+    charge: -0.17337001
+  C2: # crosslinked C
+    element: C
+    charge: 0.68373000
+  O2:
+    element: O
+    charge: -0.57339001
+  ca4: 
+    element: C
+    charge: 0.00829000
+  ha4:
+    element: H
+    charge: 0.18316000
+  ca5: 
+    element: C
+    charge: -0.15591000
+  C3: # terminated C
+    element: C
+    charge: 0.65314000
+  O3:
+    element: O
+    charge: -0.53921998
+  oh3:
+    element: O
+    charge: -0.60354001
+  ho3:
+    element: H
+    charge: 0.45265001
+  ca6:
+    element: C
+    charge: -0.00762000
+  ha6:
+    element: H
+    charge: 0.17549000
+
+TMC_T_2P_3: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-2P, crosslinked C is C3
+  ca1:
+    element: C
+    charge: -0.15591000
+  C1: # terminated C
+    element: C
+    charge: 0.65314000
+  O1:
+    element: O
+    charge: -0.53921998
+  oh1:
+    element: O
+    charge: -0.60354001
+  ho1:
+    element: H
+    charge: 0.45265001
+  ca2: 
+    element: C
+    charge: 0.00829000
+  ha2:
+    element: H
+    charge: 0.18316000
+  ca3:
+    element: C
+    charge: -0.15591000
+  C2: # terminated C
+    element: C
+    charge: 0.65314000
+  O2:
+    element: O
+    charge: -0.53921998
+  oh2:
+    element: O
+    charge: -0.60354001
+  ho2:
+    element: H
+    charge: 0.45265001
+  ca4: 
+    element: C
+    charge: -0.00762000
+  ha4:
+    element: H
+    charge: 0.17549000
+  ca5: 
+    element: C
+    charge: -0.17337001
+  C3: # crosslinked C
+    element: C
+    charge: 0.68373000
+  O3:
+    element: O
+    charge: -0.57339001
+  ca6:
+    element: C
+    charge: -0.00762000
+  ha6:
+    element: H
+    charge: 0.17549000
+
+TMC_T_1P_1_2: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-1P, crosslinked C is C1, C with protonated O is C2
+  ca1:
+    element: C
+    charge: -0.19165999
+  C1: # crosslinked C
+    element: C
+    charge: 0.68914998
+  O1:
+    element: O
+    charge: -0.59364002
+  ca2: 
+    element: C
+    charge: -0.07435999
+  ha2:
+    element: H
+    charge: 0.13474000
+  ca3:
+    element: C
+    charge: -0.17712999
+  C2: # terminated C, protonated
+    element: C
+    charge: 0.66399998
+  O2:
+    element: O
+    charge: -0.58524000
+  oh2:
+    element: O
+    charge: -0.60641002
+  ho2:
+    element: H
+    charge: 0.42839000
+  ca4: 
+    element: C
+    charge: -0.01433999
+  ha4:
+    element: H
+    charge: 0.18113001
+  ca5: 
+    element: C
+    charge: -0.15836000
+  C3: # terminated C, deprotonated
+    element: C
+    charge: 0.91290999
+  O3:
+    element: O
+    charge: -0.82042002
+  O4: # deprotonated O
+    element: O
+    charge: -0.82042002
+  ca6:
+    element: C
+    charge: -0.02126999
+  ha6:
+    element: H
+    charge: 0.17602000
+
+TMC_T_1P_1_3: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-1P, crosslinked C is C1, C with protonated O is C3
+  ca1:
+    element: C
+    charge: -0.19165999
+  C1: # crosslinked C
+    element: C
+    charge: 0.68914998
+  O1:
+    element: O
+    charge: -0.59364002
+  ca2: 
+    element: C
+    charge: -0.01433999
+  ha2:
+    element: H
+    charge: 0.18113001
+  ca3:
+    element: C
+    charge: -0.15836000
+  C2: # terminated C, deprotonated
+    element: C
+    charge: 0.91290999
+  O2:
+    element: O
+    charge: -0.82042002
+  O4: # deprotonated O
+    element: O
+    charge: -0.82042002
+  ca4: 
+    element: C
+    charge: -0.07435999
+  ha4:
+    element: H
+    charge: 0.13474000
+  ca5: 
+    element: C
+    charge: -0.17712999
+  C3: # terminated C, protonated
+    element: C
+    charge: 0.66399998
+  O3:
+    element: O
+    charge: -0.58524000
+  oh3:
+    element: O
+    charge: -0.60641002
+  ho3:
+    element: H
+    charge: 0.42839000
+  ca6:
+    element: C
+    charge: -0.02126999
+  ha6:
+    element: H
+    charge: 0.17602000
+
+TMC_T_1P_2_1: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-1P, crosslinked C is C2, C with protonated O is C1
+  ca1:
+    element: C
+    charge: -0.17712999
+  C1: # terminated C, protonated
+    element: C
+    charge: 0.66399998
+  O1:
+    element: O
+    charge: -0.58524000
+  oh1:
+    element: O
+    charge: -0.60641002
+  ho1:
+    element: H
+    charge: 0.42839000
+  ca2: 
+    element: C
+    charge: -0.07435999
+  ha2:
+    element: H
+    charge: 0.13474000
+  ca3:
+    element: C
+    charge: -0.19165999
+  C2: # crosslinked C
+    element: C
+    charge: 0.68914998
+  O2:
+    element: O
+    charge: -0.59364002
+  ca4: 
+    element: C
+    charge: -0.02126999
+  ha4:
+    element: H
+    charge: 0.17602000
+  ca5: 
+    element: C
+    charge: -0.15836000
+  C3: # terminated C, deprotonated
+    element: C
+    charge: 0.91290999
+  O3:
+    element: O
+    charge: -0.82042002
+  O4: # deprotonated O
+    element: O
+    charge: -0.82042002
+  ca6:
+    element: C
+    charge: -0.01433999
+  ha6:
+    element: H
+    charge: 0.18113001
+
+TMC_T_1P_2_3: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-1P, crosslinked C is C2, C with protonated O is C3
+  ca1:
+    element: C
+    charge: -0.15836000
+  C1: # terminated C, deprotonated
+    element: C
+    charge: 0.91290999
+  O1:
+    element: O
+    charge: -0.82042002
+  O4: # deprotonated O
+    element: O
+    charge: -0.82042002
+  ca2: 
+    element: C
+    charge: -0.01433999
+  ha2:
+    element: H
+    charge: 0.18113001
+  ca3:
+    element: C
+    charge: -0.19165999
+  C2: # crosslinked C
+    element: C
+    charge: 0.68914998
+  O2:
+    element: O
+    charge: -0.59364002
+  ca4: 
+    element: C
+    charge: -0.02126999
+  ha4:
+    element: H
+    charge: 0.17602000
+  ca5: 
+    element: C
+    charge: -0.17712999
+  C3: # terminated C, protonated
+    element: C
+    charge: 0.66399998
+  O3:
+    element: O
+    charge: -0.58524000
+  oh3:
+    element: O
+    charge: -0.60641002
+  ho3:
+    element: H
+    charge: 0.42839000
+  ca6:
+    element: C
+    charge: -0.07435999
+  ha6:
+    element: H
+    charge: 0.13474000
+
+TMC_T_1P_3_1: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-1P, crosslinked C is C3, C with protonated O is C1
+  ca1:
+    element: C
+    charge: -0.17712999
+  C1: # terminated C, protonated
+    element: C
+    charge: 0.66399998
+  O1:
+    element: O
+    charge: -0.58524000
+  oh1:
+    element: O
+    charge: -0.60641002
+  ho1:
+    element: H
+    charge: 0.42839000
+  ca2: 
+    element: C
+    charge: -0.02126999
+  ha2:
+    element: H
+    charge: 0.17602000
+  ca3:
+    element: C
+    charge: -0.15836000
+  C2: # terminated C, deprotonated
+    element: C
+    charge: 0.91290999
+  O2:
+    element: O
+    charge: -0.82042002
+  O4: # deprotonated O
+    element: O
+    charge: -0.82042002
+  ca4: 
+    element: C
+    charge: -0.07435999
+  ha4:
+    element: H
+    charge: 0.13474000
+  ca5: 
+    element: C
+    charge: -0.19165999
+  C3: # crosslinked C
+    element: C
+    charge: 0.68914998
+  O3:
+    element: O
+    charge: -0.59364002
+  ca6:
+    element: C
+    charge: -0.01433999
+  ha6:
+    element: H
+    charge: 0.18113001
+
+TMC_T_1P_3_2: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-1P, crosslinked C is C3, C with protonated O is C3
+  ca1:
+    element: C
+    charge: -0.15836000
+  C1: # terminated C, deprotonated
+    element: C
+    charge: 0.91290999
+  O1:
+    element: O
+    charge: -0.82042002
+  O4: # deprotonated O
+    element: O
+    charge: -0.82042002
+  ca2: 
+    element: C
+    charge: -0.02126999
+  ha2:
+    element: H
+    charge: 0.17602000
+  ca3:
+    element: C
+    charge: -0.17712999
+  C2: # terminated C, protonated
+    element: C
+    charge: 0.66399998
+  O2:
+    element: O
+    charge: -0.58524000
+  oh2:
+    element: O
+    charge: -0.60641002
+  ho2:
+    element: H
+    charge: 0.42839000
+  ca4: 
+    element: C
+    charge: -0.01433999
+  ha4:
+    element: H
+    charge: 0.18113001
+  ca5: 
+    element: C
+    charge: -0.19165999
+  C3: # crosslinked
+    element: C
+    charge: 0.68914998
+  O3:
+    element: O
+    charge: -0.59364002
+  ca6:
+    element: C
+    charge: -0.07435999
+  ha6:
+    element: H
+    charge: 0.13474000
+
+TMC_T_0P_1: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-0P, crosslinked C is C1
+  ca1:
+    element: C
+    charge: -0.21607999
+  C1: # crosslinked C
+    element: C
+    charge: 0.70420999
+  O1:
+    element: O
+    charge: -0.62942999
+  ca2: 
+    element: C
+    charge: -0.08307000
+  ha2:
+    element: H
+    charge: 0.14417001
+  ca3:
+    element: C
+    charge: -0.16347999
+  C2: # terminated C
+    element: C
+    charge: 0.90746999
+  O2:
+    element: O
+    charge: -0.85859000
+  O4: # deprotonated O
+    element: O
+    charge: -0.85859000
+  ca4: 
+    element: C
+    charge: -0.08307000
+  ha4:
+    element: H
+    charge: 0.14417001
+  ca5: 
+    element: C
+    charge: -0.16347999
+  C3: # terminated C
+    element: C
+    charge: 0.90746999
+  O3:
+    element: O
+    charge: -0.85859000
+  O5: # deprotonated O
+    element: O
+    charge: -0.85859000
+  ca6:
+    element: C
+    charge: -0.05125999
+  ha6:
+    element: H
+    charge: 0.16202000
+
+TMC_T_0P_2: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-0P, crosslinked C is C2
+  ca1:
+    element: C
+    charge: -0.16347999
+  C1: # terminated C
+    element: C
+    charge: 0.90746999
+  O1:
+    element: O
+    charge: -0.85859000
+  O4: # deprotonated O
+    element: O
+    charge: -0.85859000
+  ca2: 
+    element: C
+    charge: -0.08307000
+  ha2:
+    element: H
+    charge: 0.14417001
+  ca3:
+    element: C
+    charge: -0.21607999
+  C2: # crosslinked C
+    element: C
+    charge: 0.70420999
+  O2:
+    element: O
+    charge: -0.62942999
+  ca4: 
+    element: C
+    charge: -0.05125999
+  ha4:
+    element: H
+    charge: 0.16202000
+  ca5: 
+    element: C
+    charge: -0.16347999
+  C3: # terminated C
+    element: C
+    charge: 0.90746999
+  O3:
+    element: O
+    charge: -0.85859000
+  O5: # deprotonated O
+    element: O
+    charge: -0.85859000
+  ca6:
+    element: C
+    charge: -0.08307000
+  ha6:
+    element: H
+    charge: 0.14417001
+
+TMC_T_0P_3: # charges pulled from OpenEye AM1-BCC ELF10, 1 MPD-L between 2 TMC-T-0P, crosslinked C is C3
+  ca1:
+    element: C
+    charge: -0.16347999
+  C1: # terminated C
+    element: C
+    charge: 0.90746999
+  O1:
+    element: O
+    charge: -0.85859000
+  O4:
+    element: O
+    charge: -0.85859000
+  ca2: 
+    element: C
+    charge: -0.05125999
+  ha2:
+    element: H
+    charge: 0.16202000
+  ca3:
+    element: C
+    charge: -0.16347999
+  C2: # terminated C
+    element: C
+    charge: 0.90746999
+  O2:
+    element: O
+    charge: -0.85859000
+  O5: # deprotonated O
+    element: O
+    charge: -0.85859000
+  ca4: 
+    element: C
+    charge: -0.08307000
+  ha4:
+    element: H
+    charge: 0.14417001
+  ca5: 
+    element: C
+    charge: -0.21607999
+  C3: # crosslinked C
+    element: C
+    charge: 0.70420999
+  O3:
+    element: O
+    charge: -0.62942999
+  ca6:
+    element: C
+    charge: -0.08307000
+  ha6:
+    element: H
+    charge: 0.14417001
+
+TMC_C: # charges pulled from OpenEye AM1-BCC ELF10, crosslinked TMC between 3 MPD-T
+  ca1:
+    element: C
+    charge: -0.16336000
+  C1: # crosslinked C
+    element: C
+    charge: 0.68163002
+  O1:
+    element: O
+    charge: -0.58507001
+  ca2: 
+    element: C
+    charge: -0.03564000
+  ha2:
+    element: H
+    charge: 0.16757999
+  ca3:
+    element: C
+    charge: -0.16336000
+  C2: # crosslinked C
+    element: C
+    charge: 0.68163002
+  O2:
+    element: O
+    charge: -0.58507001
+  ca4:
+    element: C
+    charge: -0.03564000
+  ha4:
+    element: H
+    charge: 0.16757999
+  ca5: 
+    element: C
+    charge: -0.16336000
+  C3: # crosslinked C
+    element: C
+    charge: 0.68163002
+  O3:
+    element: O
+    charge: -0.58507001
+  ca6:
+    element: C
+    charge: -0.03564000
+  ha6:
+    element: H
+    charge: 0.16757999

@@ -1,0 +1,6 @@
+source leaprc.gaff
+SUS = loadmol2 fragment.mol2
+loadamberparams fragment.frcmod
+saveoff SUS sus.lib
+saveamberparm SUS fragment.prmtop fragment.inpcrd
+quit
