@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH -A bio230032p
+#SBATCH -N 1 -n 128
+#SBATCH -t 12:00:00
+#SBATCH -p RM
+#SBATCH -J 'relaxation_before_chlorination_1'
+#SBATCH -o '%x.out'
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=nasc4134@colorado.edu
+
+module purge
+
+# Change to Gromacs 2023.1 to run simulations
+module load gcc
+module load openmpi/4.0.2-gcc8.3.1
+
+source /jet/home/schwinns/.bashrc
+source /jet/home/schwinns/pkgs/gromacs-2023.1/bin/GMXRC
+
+python relaxation.py -c npt.gro -p PA_ions.top -v nvt1.mdp -n npt1.mdp
+

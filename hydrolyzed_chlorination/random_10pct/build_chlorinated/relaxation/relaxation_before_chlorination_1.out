@@ -1,0 +1,388 @@
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+-------------------------------------------------------------------------------
+There are messages associated with the following module(s):
+-------------------------------------------------------------------------------
+
+cuda/11.1.1:
+   Warning - This module has been deprecated and is scheduled for removal.
+   Please transition to a module from the production pool instead.
+
+-------------------------------------------------------------------------------
+
+# conda environments:
+#
+hdphmm                   /jet/home/schwinns/.conda/envs/hdphmm
+larch                    /jet/home/schwinns/.conda/envs/larch
+larch-nv                 /jet/home/schwinns/.conda/envs/larch-nv
+lmp_env                  /jet/home/schwinns/.conda/envs/lmp_env
+mbar                     /jet/home/schwinns/.conda/envs/mbar
+mda                      /jet/home/schwinns/.conda/envs/mda
+base                  *  /opt/packages/anaconda3-2024.10-1
+
+                      :-) GROMACS - gmx grompp, 2023.1 (-:
+
+Executable:   /jet/home/schwinns/pkgs/gromacs-2023.1/bin/gmx_mpi
+Data prefix:  /jet/home/schwinns/pkgs/gromacs-2023.1
+Working dir:  /ocean/projects/chm230020p/schwinns/Projects/polymer_membrane/REACTER/Lx5_Ly5_Lz10/chlorination/50pct_deprotonated/NaCl_0.2M/hydrolyzed_chlorination/random_10pct/build_chlorinated/relaxation
+Command line:
+  gmx_mpi grompp -f nvt1.mdp -p PA_ions.top -c npt.gro -o nvt1.tpr
+
+Setting the LD random seed to -578
+
+Generated 2080 of the 2080 non-bonded parameter combinations
+Generating 1-4 interactions: fudge = 0.5
+
+Generated 2080 of the 2080 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'PA1'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA2'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA3'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA4'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA5'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA6'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA7'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA8'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA9'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA10'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA11'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA12'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA13'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA14'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'NA'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'CL'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'NA'
+
+Setting gen_seed to -589958
+
+Velocities were taken from a Maxwell distribution at 300 K
+Analysing residue names:
+There are:    14      Other residues
+There are:  6120      Water residues
+There are:    89        Ion residues
+Analysing residues not classified as Protein/DNA/RNA/Water and splitting into groups...
+Number of degrees of freedom in T-Coupling group System is 83972.00
+
+The largest distance between excluded atoms is 0.395 nm between atom 12672 and 12689
+
+Determining Verlet buffer for a tolerance of 0.005 kJ/mol/ps at 1000 K
+
+Calculated rlist for 1x1 atom pair-list as 1.275 nm, buffer size 0.275 nm
+
+Set rlist, assuming 4x4 atom pair-list, to 1.137 nm, buffer size 0.137 nm
+
+Note that mdrun will redetermine rlist based on the actual pair-list setup
+
+NOTE 1 [file nvt1.mdp]:
+  You are using geometric combination rules in LJ-PME, but your non-bonded
+  C6 parameters do not follow these rules. This will introduce very small
+  errors in the forces and energies in your simulations. Dispersion
+  correction will correct total energy and/or pressure for isotropic
+  systems, but not forces or surface tensions.
+
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 44x44x120, spacing 0.117 0.117 0.113
+
+Estimate for the relative computational load of the PME mesh part: 0.29
+
+This run will generate roughly 21 Mb of data
+
+There was 1 NOTE
+
+GROMACS reminds you: "Everybody Lie Down On the Floor and Keep Calm" (KLF)
+
+                      :-) GROMACS - gmx mdrun, 2023.1 (-:
+
+Executable:   /jet/home/schwinns/pkgs/gromacs-2023.1/bin/gmx_mpi
+Data prefix:  /jet/home/schwinns/pkgs/gromacs-2023.1
+Working dir:  /ocean/projects/chm230020p/schwinns/Projects/polymer_membrane/REACTER/Lx5_Ly5_Lz10/chlorination/50pct_deprotonated/NaCl_0.2M/hydrolyzed_chlorination/random_10pct/build_chlorinated/relaxation
+Command line:
+  gmx_mpi mdrun -s nvt1.tpr -deffnm nvt1
+
+Reading file nvt1.tpr, VERSION 2023.1 (single precision)
+Update groups can not be used for this system because atoms that are (in)directly constrained together are interdispersed with other atoms
+
+NOTE: Periodic molecules are present in this system. Because of this, the domain decomposition algorithm cannot easily determine the minimum cell size that it requires for treating bonded interactions. Instead, domain decomposition will assume that half the non-bonded cut-off will be a suitable lower bound.
+Using 128 MPI processes
+
+Non-default thread affinity set, disabling internal thread affinity
+
+Using 1 OpenMP thread per MPI process
+
+starting mdrun 'prehydrate.data converted'
+250000 steps,    500.0 ps.
+
+Writing final coordinates.
+
+
+Dynamic load balancing report:
+ DLB was off during the run due to low measured imbalance.
+ Average load imbalance: 16.6%.
+ The balanceable part of the MD step is 36%, load imbalance is computed from this.
+ Part of the total run time spent waiting due to load imbalance: 6.0%.
+ Average PME mesh/force load: 1.614
+ Part of the total run time spent waiting due to PP/PME imbalance: 19.7 %
+
+NOTE: 6.0 % of the available CPU time was lost due to load imbalance
+      in the domain decomposition.
+      Dynamic load balancing was automatically disabled, but it might be beneficial to manually turn it on (option -dlb yes.)
+      You can also consider manually changing the decomposition (option -dd);
+      e.g. by using fewer domains along the box dimension in which there is
+      considerable inhomogeneity in the simulated system.
+NOTE: 19.7 % performance was lost because the PME ranks
+      had more work to do than the PP ranks.
+      You might want to increase the number of PME ranks
+      or increase the cut-off and the grid spacing.
+
+
+               Core t (s)   Wall t (s)        (%)
+       Time:    63984.478      499.881    12799.9
+                 (ns/day)    (hour/ns)
+Performance:       86.421        0.278
+
+GROMACS reminds you: "Documentation is like sex: When it's good it's great, and when it's bad it's better than nothing." (Linus Torvalds)
+
+                      :-) GROMACS - gmx grompp, 2023.1 (-:
+
+Executable:   /jet/home/schwinns/pkgs/gromacs-2023.1/bin/gmx_mpi
+Data prefix:  /jet/home/schwinns/pkgs/gromacs-2023.1
+Working dir:  /ocean/projects/chm230020p/schwinns/Projects/polymer_membrane/REACTER/Lx5_Ly5_Lz10/chlorination/50pct_deprotonated/NaCl_0.2M/hydrolyzed_chlorination/random_10pct/build_chlorinated/relaxation
+Command line:
+  gmx_mpi grompp -f npt1.mdp -p PA_ions.top -c nvt1.gro -o npt1.tpr
+
+Setting the LD random seed to -268509793
+
+Generated 2080 of the 2080 non-bonded parameter combinations
+Generating 1-4 interactions: fudge = 0.5
+
+Generated 2080 of the 2080 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'PA1'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA2'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA3'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA4'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA5'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA6'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA7'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA8'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA9'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA10'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA11'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA12'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA13'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'PA14'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'NA'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'CL'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'NA'
+Analysing residue names:
+There are:    14      Other residues
+There are:  6120      Water residues
+There are:    89        Ion residues
+Analysing residues not classified as Protein/DNA/RNA/Water and splitting into groups...
+Number of degrees of freedom in T-Coupling group System is 83972.00
+
+The largest distance between excluded atoms is 0.409 nm between atom 10323 and 10324
+
+Determining Verlet buffer for a tolerance of 0.005 kJ/mol/ps at 1000 K
+
+Calculated rlist for 1x1 atom pair-list as 1.275 nm, buffer size 0.275 nm
+
+Set rlist, assuming 4x4 atom pair-list, to 1.137 nm, buffer size 0.137 nm
+
+Note that mdrun will redetermine rlist based on the actual pair-list setup
+
+NOTE 1 [file npt1.mdp]:
+  You are using geometric combination rules in LJ-PME, but your non-bonded
+  C6 parameters do not follow these rules. This will introduce very small
+  errors in the forces and energies in your simulations. Dispersion
+  correction will correct total energy and/or pressure for isotropic
+  systems, but not forces or surface tensions.
+
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 44x44x120, spacing 0.117 0.117 0.113
+
+Estimate for the relative computational load of the PME mesh part: 0.29
+
+This run will generate roughly 57 Mb of data
+
+There was 1 NOTE
+
+GROMACS reminds you: "Why is it that programmers always confuse Halloween with Christmas? Because 31 OCT = 25 DEC." (Anonymous)
+
+                      :-) GROMACS - gmx mdrun, 2023.1 (-:
+
+Executable:   /jet/home/schwinns/pkgs/gromacs-2023.1/bin/gmx_mpi
+Data prefix:  /jet/home/schwinns/pkgs/gromacs-2023.1
+Working dir:  /ocean/projects/chm230020p/schwinns/Projects/polymer_membrane/REACTER/Lx5_Ly5_Lz10/chlorination/50pct_deprotonated/NaCl_0.2M/hydrolyzed_chlorination/random_10pct/build_chlorinated/relaxation
+Command line:
+  gmx_mpi mdrun -s npt1.tpr -deffnm npt1
+
+Reading file npt1.tpr, VERSION 2023.1 (single precision)
+Update groups can not be used for this system because atoms that are (in)directly constrained together are interdispersed with other atoms
+
+NOTE: Periodic molecules are present in this system. Because of this, the domain decomposition algorithm cannot easily determine the minimum cell size that it requires for treating bonded interactions. Instead, domain decomposition will assume that half the non-bonded cut-off will be a suitable lower bound.
+Using 128 MPI processes
+
+Non-default thread affinity set, disabling internal thread affinity
+
+Using 1 OpenMP thread per MPI process
+
+starting mdrun 'prehydrate.data converted'
+5000000 steps,  10000.0 ps.
+
+Step 222912, time 445.824 (ps)  LINCS WARNING
+relative constraint deviation after LINCS:
+rms 0.000002, max 0.000007 (between atoms 15625 and 15633)
+bonds that rotated more than 30 degrees:
+ atom 1 atom 2  angle  previous, current, constraint length
+  15766  15794   33.4    0.1087   0.1087      0.1087
+
+Step 2619139, time 5238.28 (ps)  LINCS WARNING
+relative constraint deviation after LINCS:
+rms 0.000010, max 0.000043 (between atoms 6452 and 6641)
+bonds that rotated more than 30 degrees:
+ atom 1 atom 2  angle  previous, current, constraint length
+    663    707   30.4    0.1087   0.1087      0.1087
+
+Step 4302360, time 8604.72 (ps)  LINCS WARNING
+relative constraint deviation after LINCS:
+rms 0.000018, max 0.000073 (between atoms 5136 and 5142)
+bonds that rotated more than 30 degrees:
+ atom 1 atom 2  angle  previous, current, constraint length
+   3736   3901   32.9    0.1087   0.1087      0.1087
+
+Writing final coordinates.
+
+
+Dynamic load balancing report:
+ DLB got disabled because it was unsuitable to use.
+ Average load imbalance: 199.4%.
+ The balanceable part of the MD step is 23%, load imbalance is computed from this.
+ Part of the total run time spent waiting due to load imbalance: 45.2%.
+ Average PME mesh/force load: 1.221
+ Part of the total run time spent waiting due to PP/PME imbalance: 10.5 %
+
+NOTE: 45.2 % of the available CPU time was lost due to load imbalance
+      in the domain decomposition.
+      You can consider manually changing the decomposition (option -dd);
+      e.g. by using fewer domains along the box dimension in which there is
+      considerable inhomogeneity in the simulated system.
+NOTE: 10.5 % performance was lost because the PME ranks
+      had more work to do than the PP ranks.
+      You might want to increase the number of PME ranks
+      or increase the cut-off and the grid spacing.
+
+
+               Core t (s)   Wall t (s)        (%)
+       Time:  3407613.655    26622.024    12800.0
+                         7h23:42
+                 (ns/day)    (hour/ns)
+Performance:       32.454        0.740
+
+GROMACS reminds you: "This Puke Stinks Like Beer" (LIVE)
+
