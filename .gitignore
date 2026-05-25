@@ -14,6 +14,7 @@
 # ignore the build iterations
 *iter*gro
 *iter*tpr
+*iter*top
 
 # ignore test notebooks
 test*.ipynb

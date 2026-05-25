@@ -1,0 +1,19 @@
+integrator               = steep
+emstep                   = 0.0001
+nsteps                   = -1
+
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+nstxout-compressed       = 1000
+
+cutoff-scheme            = Verlet
+pbc                      = xyz
+
+coulombtype              = PME
+vdw_type                 = PME
+
+gen_vel                  = no
+
+periodic-molecules       = yes
+DispCorr                 = EnerPres

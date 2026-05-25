@@ -1,0 +1,1856 @@
+MPD_2Cl:
+  N1:
+    charge: -0.47439
+    element: N
+  N2:
+    charge: -0.47439
+    element: N
+  ca1:
+    charge: -0.13287
+    element: C
+  ca2:
+    charge: -0.08234
+    element: C
+  ca3:
+    charge: 0.03518
+    element: C
+  ca4:
+    charge: -0.08234
+    element: C
+  ca5:
+    charge: 0.03518
+    element: C
+  ca6:
+    charge: -0.15064
+    element: C
+  cl1:
+    charge: -0.01257
+    element: Cl
+  cl2:
+    charge: -0.01257
+    element: Cl
+  ha1:
+    charge: 0.14171
+    element: H
+  ha2:
+    charge: 0.15547
+    element: H
+  ha4:
+    charge: 0.15547
+    element: H
+  ha6:
+    charge: 0.14826
+    element: H
+  hn1a:
+    charge: 0.37542
+    element: H
+  hn2a:
+    charge: 0.37542
+    element: H
+MPD_Cl_1:
+  N1:
+    charge: -0.47275999
+    element: N
+  N2:
+    charge: -0.81778997
+    element: N
+  ca1:
+    charge: -0.09465
+    element: C
+  ca2:
+    charge: -0.13605
+    element: C
+  ca3:
+    charge: 0.06542
+    element: C
+  ca4:
+    charge: -0.18303999
+    element: C
+  ca5:
+    charge: 0.14582
+    element: C
+  ca6:
+    charge: -0.20227
+    element: C
+  cl:
+    charge: -0.01946
+    element: Cl
+  ha1:
+    charge: 0.13471
+    element: H
+  ha2:
+    charge: 0.15023
+    element: H
+  ha4:
+    charge: 0.13529999
+    element: H
+  ha6:
+    charge: 0.14013
+    element: H
+  hn1a:
+    charge: 0.37261
+    element: H
+  hn2a:
+    charge: 0.39089998
+    element: H
+  hn2b:
+    charge: 0.39089998
+    element: H
+MPD_Cl_2:
+  N1:
+    charge: -0.81778997
+    element: N
+  N2:
+    charge: -0.47275999
+    element: N
+  ca1:
+    charge: -0.09465
+    element: C
+  ca2:
+    charge: -0.18303999
+    element: C
+  ca3:
+    charge: 0.14582
+    element: C
+  ca4:
+    charge: -0.13605
+    element: C
+  ca5:
+    charge: 0.06542
+    element: C
+  ca6:
+    charge: -0.20227
+    element: C
+  cl:
+    charge: -0.01946
+    element: Cl
+  ha1:
+    charge: 0.13471
+    element: H
+  ha2:
+    charge: 0.13529999
+    element: H
+  ha4:
+    charge: 0.15023
+    element: H
+  ha6:
+    charge: 0.14013
+    element: H
+  hn1a:
+    charge: 0.39089998
+    element: H
+  hn1b:
+    charge: 0.39089998
+    element: H
+  hn2a:
+    charge: 0.37261
+    element: H
+MPD_L:
+  N1:
+    charge: -0.46721
+    element: N
+  N2:
+    charge: -0.46721
+    element: N
+  ca1:
+    charge: -0.08205001
+    element: C
+  ca2:
+    charge: -0.17455
+    element: C
+  ca3:
+    charge: 0.09408
+    element: C
+  ca4:
+    charge: -0.17455
+    element: C
+  ca5:
+    charge: 0.09408
+    element: C
+  ca6:
+    charge: -0.23816
+    element: C
+  ha1:
+    charge: 0.14181
+    element: H
+  ha2:
+    charge: 0.17558999
+    element: H
+  ha4:
+    charge: 0.17558999
+    element: H
+  ha6:
+    charge: 0.12763999
+    element: H
+  hn1a:
+    charge: 0.31907001
+    element: H
+  hn2a:
+    charge: 0.31907001
+    element: H
+MPD_L_Cl_ortho:
+  N1:
+    charge: -0.46721
+    element: N
+  N2:
+    charge: -0.46721
+    element: N
+  ca1:
+    charge: -0.08205001
+    element: C
+  ca2:
+    charge: -0.17455
+    element: C
+  ca3:
+    charge: 0.10823
+    element: C
+  ca4:
+    charge: -0.17455
+    element: C
+  ca5:
+    charge: 0.10823
+    element: C
+  ca6:
+    charge: -0.09627
+    element: C
+  cl:
+    charge: -0.10763
+    element: Cl
+  ha1:
+    charge: 0.14181
+    element: H
+  ha2:
+    charge: 0.17558999
+    element: H
+  ha4:
+    charge: 0.17558999
+    element: H
+  hn1a:
+    charge: 0.33043
+    element: H
+  hn2a:
+    charge: 0.33043
+    element: H
+MPD_T:
+  N1:
+    charge: -0.46871001
+    element: N
+  N2:
+    charge: -0.82321
+    element: N
+  ca1:
+    charge: -0.045700359061514206
+    element: C
+  ca2:
+    charge: -0.1680703690615142
+    element: C
+  ca3:
+    charge: 0.1258996409384858
+    element: C
+  ca4:
+    charge: -0.18804036906151422
+    element: C
+  ca5:
+    charge: 0.1910096409384858
+    element: C
+  ca6:
+    charge: -0.2245703490615142
+    element: C
+  ha1:
+    charge: 0.13486999
+    element: H
+  ha2:
+    charge: 0.17089
+    element: H
+  ha4:
+    charge: 0.13387001
+    element: H
+  ha6:
+    charge: 0.12774
+    element: H
+  hn1a:
+    charge: 0.31683999
+    element: H
+  hn2a:
+    charge: 0.39148
+    element: H
+  hn2b:
+    charge: 0.39148
+    element: H
+MPD_T_Cl_1:
+  N1:
+    charge: -0.47558999
+    element: N
+  N2:
+    charge: -0.47303
+    element: N
+  ca1:
+    charge: -0.06326536406151416
+    element: C
+  ca2:
+    charge: -0.15704536406151415
+    element: C
+  ca3:
+    charge: 0.10742463593848584
+    element: C
+  ca4:
+    charge: -0.15526536406151414
+    element: C
+  ca5:
+    charge: 0.12368463593848585
+    element: C
+  ca6:
+    charge: -0.16560537406151415
+    element: C
+  cl:
+    charge: -0.00303
+    element: Cl
+  ha1:
+    charge: 0.1348
+    element: H
+  ha2:
+    charge: 0.13561
+    element: H
+  ha4:
+    charge: 0.16152
+    element: H
+  ha6:
+    charge: 0.16277
+    element: H
+  hn1a:
+    charge: 0.37507999
+    element: H
+  hn2a:
+    charge: 0.32166001
+    element: H
+MPD_T_Cl_2:
+  N1:
+    charge: -0.47303
+    element: N
+  N2:
+    charge: -0.47558999
+    element: N
+  ca1:
+    charge: -0.06326536406151416
+    element: C
+  ca2:
+    charge: -0.15526536406151414
+    element: C
+  ca3:
+    charge: 0.12368463593848585
+    element: C
+  ca4:
+    charge: -0.15704536406151415
+    element: C
+  ca5:
+    charge: 0.10742463593848584
+    element: C
+  ca6:
+    charge: -0.16560537406151415
+    element: C
+  cl:
+    charge: -0.00303
+    element: Cl
+  ha1:
+    charge: 0.1348
+    element: H
+  ha2:
+    charge: 0.16152
+    element: H
+  ha4:
+    charge: 0.13561
+    element: H
+  ha6:
+    charge: 0.16277
+    element: H
+  hn1a:
+    charge: 0.32166001
+    element: H
+  hn2a:
+    charge: 0.37507999
+    element: H
+TMC_0P:
+  C1:
+    charge: 0.90610998
+    element: C
+  C2:
+    charge: 0.90610998
+    element: C
+  C3:
+    charge: 0.90610998
+    element: C
+  O1:
+    charge: -0.88811998
+    element: O
+  O2:
+    charge: -0.88811998
+    element: O
+  O3:
+    charge: -0.88811998
+    element: O
+  O4:
+    charge: -0.88811998
+    element: O
+  O5:
+    charge: -0.88811998
+    element: O
+  O6:
+    charge: -0.88811998
+    element: O
+  ca1:
+    charge: -0.18822
+    element: C
+  ca2:
+    charge: -0.08180001
+    element: C
+  ca3:
+    charge: -0.18822
+    element: C
+  ca4:
+    charge: -0.08180001
+    element: C
+  ca5:
+    charge: -0.18822
+    element: C
+  ca6:
+    charge: -0.08180001
+    element: C
+  ha2:
+    charge: 0.14014999
+    element: H
+  ha4:
+    charge: 0.14014999
+    element: H
+  ha6:
+    charge: 0.14014999
+    element: H
+TMC_1P_1:
+  C1:
+    charge: 0.69033998
+    element: C
+  C2:
+    charge: 0.90799999
+    element: C
+  C3:
+    charge: 0.90799999
+    element: C
+  O1:
+    charge: -0.60645998
+    element: O
+  O2:
+    charge: -0.85338998
+    element: O
+  O3:
+    charge: -0.85338998
+    element: O
+  O4:
+    charge: -0.85338998
+    element: O
+  O5:
+    charge: -0.85338998
+    element: O
+  ca1:
+    charge: -0.19048
+    element: C
+  ca2:
+    charge: -0.08092001
+    element: C
+  ca3:
+    charge: -0.15832
+    element: C
+  ca4:
+    charge: -0.08092001
+    element: C
+  ca5:
+    charge: -0.15832
+    element: C
+  ca6:
+    charge: -0.04718001
+    element: C
+  ha2:
+    charge: 0.13898
+    element: H
+  ha4:
+    charge: 0.13898
+    element: H
+  ha6:
+    charge: 0.16777999
+    element: H
+  ho1:
+    charge: 0.40584
+    element: H
+  oh1:
+    charge: -0.62176002
+    element: O
+TMC_1P_2:
+  C1:
+    charge: 0.90799999
+    element: C
+  C2:
+    charge: 0.69033998
+    element: C
+  C3:
+    charge: 0.90799999
+    element: C
+  O1:
+    charge: -0.85338998
+    element: O
+  O2:
+    charge: -0.60645998
+    element: O
+  O3:
+    charge: -0.85338998
+    element: O
+  O4:
+    charge: -0.85338998
+    element: O
+  O5:
+    charge: -0.85338998
+    element: O
+  ca1:
+    charge: -0.15832
+    element: C
+  ca2:
+    charge: -0.08092001
+    element: C
+  ca3:
+    charge: -0.19048
+    element: C
+  ca4:
+    charge: -0.08092001
+    element: C
+  ca5:
+    charge: -0.15832
+    element: C
+  ca6:
+    charge: -0.04718001
+    element: C
+  ha2:
+    charge: 0.13898
+    element: H
+  ha4:
+    charge: 0.13898
+    element: H
+  ha6:
+    charge: 0.16777999
+    element: H
+  ho2:
+    charge: 0.40584
+    element: H
+  oh2:
+    charge: -0.62176002
+    element: O
+TMC_1P_3:
+  C1:
+    charge: 0.90799999
+    element: C
+  C2:
+    charge: 0.90799999
+    element: C
+  C3:
+    charge: 0.69033998
+    element: C
+  O1:
+    charge: -0.85338998
+    element: O
+  O2:
+    charge: -0.85338998
+    element: O
+  O3:
+    charge: -0.60645998
+    element: O
+  O4:
+    charge: -0.85338998
+    element: O
+  O5:
+    charge: -0.85338998
+    element: O
+  ca1:
+    charge: -0.15832
+    element: C
+  ca2:
+    charge: -0.08092001
+    element: C
+  ca3:
+    charge: -0.15832
+    element: C
+  ca4:
+    charge: -0.08092001
+    element: C
+  ca5:
+    charge: -0.19048
+    element: C
+  ca6:
+    charge: -0.04718001
+    element: C
+  ha2:
+    charge: 0.13898
+    element: H
+  ha4:
+    charge: 0.13898
+    element: H
+  ha6:
+    charge: 0.16777999
+    element: H
+  ho3:
+    charge: 0.40584
+    element: H
+  oh3:
+    charge: -0.62176002
+    element: O
+TMC_2P_1:
+  C1:
+    charge: 0.91391999
+    element: C
+  C2:
+    charge: 0.667
+    element: C
+  C3:
+    charge: 0.667
+    element: C
+  O1:
+    charge: -0.81665999
+    element: O
+  O2:
+    charge: -0.56321001
+    element: O
+  O3:
+    charge: -0.56321001
+    element: O
+  O4:
+    charge: -0.81666
+    element: O
+  ca1:
+    charge: -0.14125
+    element: C
+  ca2:
+    charge: -0.03738
+    element: C
+  ca3:
+    charge: -0.15498
+    element: C
+  ca4:
+    charge: -0.03738
+    element: C
+  ca5:
+    charge: -0.15498
+    element: C
+  ca6:
+    charge: -0.067
+    element: C
+  ha2:
+    charge: 0.1716
+    element: H
+  ha4:
+    charge: 0.1716
+    element: H
+  ha6:
+    charge: 0.13109
+    element: H
+  ho2:
+    charge: 0.42783001
+    element: H
+  ho3:
+    charge: 0.42783001
+    element: H
+  oh2:
+    charge: -0.61258
+    element: O
+  oh3:
+    charge: -0.61258
+    element: O
+TMC_2P_2:
+  C1:
+    charge: 0.667
+    element: C
+  C2:
+    charge: 0.91391999
+    element: C
+  C3:
+    charge: 0.667
+    element: C
+  O1:
+    charge: -0.56321001
+    element: O
+  O2:
+    charge: -0.81665999
+    element: O
+  O3:
+    charge: -0.56321001
+    element: O
+  O4:
+    charge: -0.81666
+    element: O
+  ca1:
+    charge: -0.15498
+    element: C
+  ca2:
+    charge: -0.03738
+    element: C
+  ca3:
+    charge: -0.14125
+    element: C
+  ca4:
+    charge: -0.067
+    element: C
+  ca5:
+    charge: -0.15498
+    element: C
+  ca6:
+    charge: -0.03738
+    element: C
+  ha2:
+    charge: 0.1716
+    element: H
+  ha4:
+    charge: 0.13109
+    element: H
+  ha6:
+    charge: 0.1716
+    element: H
+  ho1:
+    charge: 0.42783001
+    element: H
+  ho3:
+    charge: 0.42783001
+    element: H
+  oh1:
+    charge: -0.61258
+    element: O
+  oh3:
+    charge: -0.61258
+    element: O
+TMC_2P_3:
+  C1:
+    charge: 0.667
+    element: C
+  C2:
+    charge: 0.667
+    element: C
+  C3:
+    charge: 0.91391999
+    element: C
+  O1:
+    charge: -0.56321001
+    element: O
+  O2:
+    charge: -0.56321001
+    element: O
+  O3:
+    charge: -0.81665999
+    element: O
+  O4:
+    charge: -0.81666
+    element: O
+  ca1:
+    charge: -0.15498
+    element: C
+  ca2:
+    charge: -0.067
+    element: C
+  ca3:
+    charge: -0.15498
+    element: C
+  ca4:
+    charge: -0.03738
+    element: C
+  ca5:
+    charge: -0.14125
+    element: C
+  ca6:
+    charge: -0.03738
+    element: C
+  ha2:
+    charge: 0.13109
+    element: H
+  ha4:
+    charge: 0.1716
+    element: H
+  ha6:
+    charge: 0.1716
+    element: H
+  ho1:
+    charge: 0.42783001
+    element: H
+  ho2:
+    charge: 0.42783001
+    element: H
+  oh1:
+    charge: -0.61258
+    element: O
+  oh2:
+    charge: -0.61258
+    element: O
+TMC_3P:
+  C1:
+    charge: 0.64947003
+    element: C
+  C2:
+    charge: 0.64947003
+    element: C
+  C3:
+    charge: 0.64947003
+    element: C
+  O1:
+    charge: -0.5244
+    element: O
+  O2:
+    charge: -0.5244
+    element: O
+  O3:
+    charge: -0.5244
+    element: O
+  ca1:
+    charge: -0.12272
+    element: C
+  ca2:
+    charge: -0.02081
+    element: C
+  ca3:
+    charge: -0.12272
+    element: C
+  ca4:
+    charge: -0.02081
+    element: C
+  ca5:
+    charge: -0.12272
+    element: C
+  ca6:
+    charge: -0.02081
+    element: C
+  ha2:
+    charge: 0.16587999
+    element: H
+  ha4:
+    charge: 0.16587999
+    element: H
+  ha6:
+    charge: 0.16587999
+    element: H
+  ho1:
+    charge: 0.45023999
+    element: H
+  ho2:
+    charge: 0.45023999
+    element: H
+  ho3:
+    charge: 0.45023999
+    element: H
+  oh1:
+    charge: -0.59766001
+    element: O
+  oh2:
+    charge: -0.59766001
+    element: O
+  oh3:
+    charge: -0.59766001
+    element: O
+TMC_C:
+  C1:
+    charge: 0.68163002
+    element: C
+  C2:
+    charge: 0.68163002
+    element: C
+  C3:
+    charge: 0.68163002
+    element: C
+  O1:
+    charge: -0.58507001
+    element: O
+  O2:
+    charge: -0.58507001
+    element: O
+  O3:
+    charge: -0.58507001
+    element: O
+  ca1:
+    charge: -0.1630410921845426
+    element: C
+  ca2:
+    charge: -0.0353210921845426
+    element: C
+  ca3:
+    charge: -0.1630410921845426
+    element: C
+  ca4:
+    charge: -0.0353210921845426
+    element: C
+  ca5:
+    charge: -0.1630410921845426
+    element: C
+  ca6:
+    charge: -0.0353210921845426
+    element: C
+  ha2:
+    charge: 0.16757999
+    element: H
+  ha4:
+    charge: 0.16757999
+    element: H
+  ha6:
+    charge: 0.16757999
+    element: H
+TMC_L_D_1:
+  C1:
+    charge: 0.91183001
+    element: C
+  C2:
+    charge: 0.69394999
+    element: C
+  C3:
+    charge: 0.69394999
+    element: C
+  O1:
+    charge: -0.81760001
+    element: O
+  O2:
+    charge: -0.59794998
+    element: O
+  O3:
+    charge: -0.59794998
+    element: O
+  O4:
+    charge: -0.81760001
+    element: O
+  ca1:
+    charge: -0.16165072645636172
+    element: C
+  ca2:
+    charge: -0.07738072645636171
+    element: C
+  ca3:
+    charge: -0.20836072645636172
+    element: C
+  ca4:
+    charge: -0.07738072645636171
+    element: C
+  ca5:
+    charge: -0.20836072645636172
+    element: C
+  ca6:
+    charge: -0.0830807264563617
+    element: C
+  ha2:
+    charge: 0.16676999
+    element: H
+  ha4:
+    charge: 0.16676999
+    element: H
+  ha6:
+    charge: 0.1456
+    element: H
+TMC_L_D_2:
+  C1:
+    charge: 0.69394999
+    element: C
+  C2:
+    charge: 0.91183001
+    element: C
+  C3:
+    charge: 0.69394999
+    element: C
+  O1:
+    charge: -0.59794998
+    element: O
+  O2:
+    charge: -0.81760001
+    element: O
+  O3:
+    charge: -0.59794998
+    element: O
+  O4:
+    charge: -0.81760001
+    element: O
+  ca1:
+    charge: -0.20836072645636172
+    element: C
+  ca2:
+    charge: -0.07738072645636171
+    element: C
+  ca3:
+    charge: -0.16165072645636172
+    element: C
+  ca4:
+    charge: -0.0830807264563617
+    element: C
+  ca5:
+    charge: -0.20836072645636172
+    element: C
+  ca6:
+    charge: -0.07738072645636171
+    element: C
+  ha2:
+    charge: 0.16676999
+    element: H
+  ha4:
+    charge: 0.1456
+    element: H
+  ha6:
+    charge: 0.16676999
+    element: H
+TMC_L_D_3:
+  C1:
+    charge: 0.69394999
+    element: C
+  C2:
+    charge: 0.69394999
+    element: C
+  C3:
+    charge: 0.91183001
+    element: C
+  O1:
+    charge: -0.59794998
+    element: O
+  O2:
+    charge: -0.59794998
+    element: O
+  O3:
+    charge: -0.81760001
+    element: O
+  O4:
+    charge: -0.81760001
+    element: O
+  ca1:
+    charge: -0.20836072645636172
+    element: C
+  ca2:
+    charge: -0.0830807264563617
+    element: C
+  ca3:
+    charge: -0.20836072645636172
+    element: C
+  ca4:
+    charge: -0.07738072645636171
+    element: C
+  ca5:
+    charge: -0.16165072645636172
+    element: C
+  ca6:
+    charge: -0.07738072645636171
+    element: C
+  ha2:
+    charge: 0.1456
+    element: H
+  ha4:
+    charge: 0.16676999
+    element: H
+  ha6:
+    charge: 0.16676999
+    element: H
+TMC_L_P_1:
+  C1:
+    charge: 0.65267998
+    element: C
+  C2:
+    charge: 0.68264002
+    element: C
+  C3:
+    charge: 0.68264002
+    element: C
+  O1:
+    charge: -0.52929002
+    element: O
+  O2:
+    charge: -0.57046998
+    element: O
+  O3:
+    charge: -0.57046998
+    element: O
+  ca1:
+    charge: -0.1437773964563617
+    element: C
+  ca2:
+    charge: -0.044927406456361695
+    element: C
+  ca3:
+    charge: -0.1636974064563617
+    element: C
+  ca4:
+    charge: -0.044927406456361695
+    element: C
+  ca5:
+    charge: -0.1636974064563617
+    element: C
+  ca6:
+    charge: -0.000957406456361692
+    element: C
+  ha2:
+    charge: 0.15819
+    element: H
+  ha4:
+    charge: 0.15819
+    element: H
+  ha6:
+    charge: 0.18854
+    element: H
+  ho1:
+    charge: 0.44815001
+    element: H
+  oh1:
+    charge: -0.60725999
+    element: O
+TMC_L_P_2:
+  C1:
+    charge: 0.68264002
+    element: C
+  C2:
+    charge: 0.65267998
+    element: C
+  C3:
+    charge: 0.68264002
+    element: C
+  O1:
+    charge: -0.57046998
+    element: O
+  O2:
+    charge: -0.52929002
+    element: O
+  O3:
+    charge: -0.57046998
+    element: O
+  ca1:
+    charge: -0.1636974064563617
+    element: C
+  ca2:
+    charge: -0.044927406456361695
+    element: C
+  ca3:
+    charge: -0.1437773964563617
+    element: C
+  ca4:
+    charge: -0.000957406456361692
+    element: C
+  ca5:
+    charge: -0.1636974064563617
+    element: C
+  ca6:
+    charge: -0.044927406456361695
+    element: C
+  ha2:
+    charge: 0.15819
+    element: H
+  ha4:
+    charge: 0.18854
+    element: H
+  ha6:
+    charge: 0.15819
+    element: H
+  ho2:
+    charge: 0.44815001
+    element: H
+  oh2:
+    charge: -0.60725999
+    element: O
+TMC_L_P_3:
+  C1:
+    charge: 0.68264002
+    element: C
+  C2:
+    charge: 0.68264002
+    element: C
+  C3:
+    charge: 0.65267998
+    element: C
+  O1:
+    charge: -0.57046998
+    element: O
+  O2:
+    charge: -0.57046998
+    element: O
+  O3:
+    charge: -0.52929002
+    element: O
+  ca1:
+    charge: -0.1636974064563617
+    element: C
+  ca2:
+    charge: -0.000957406456361692
+    element: C
+  ca3:
+    charge: -0.1636974064563617
+    element: C
+  ca4:
+    charge: -0.044927406456361695
+    element: C
+  ca5:
+    charge: -0.1437773964563617
+    element: C
+  ca6:
+    charge: -0.044927406456361695
+    element: C
+  ha2:
+    charge: 0.18854
+    element: H
+  ha4:
+    charge: 0.15819
+    element: H
+  ha6:
+    charge: 0.15819
+    element: H
+  ho3:
+    charge: 0.44815001
+    element: H
+  oh3:
+    charge: -0.60725999
+    element: O
+TMC_T_0P_1:
+  C1:
+    charge: 0.70420999
+    element: C
+  C2:
+    charge: 0.90746999
+    element: C
+  C3:
+    charge: 0.90746999
+    element: C
+  O1:
+    charge: -0.62942999
+    element: O
+  O2:
+    charge: -0.85859
+    element: O
+  O3:
+    charge: -0.85859
+    element: O
+  O4:
+    charge: -0.85859
+    element: O
+  O5:
+    charge: -0.85859
+    element: O
+  ca1:
+    charge: -0.2533599983333334
+    element: C
+  ca2:
+    charge: -0.12035000833333337
+    element: C
+  ca3:
+    charge: -0.20075999833333336
+    element: C
+  ca4:
+    charge: -0.12035000833333337
+    element: C
+  ca5:
+    charge: -0.20075999833333336
+    element: C
+  ca6:
+    charge: -0.08853999833333337
+    element: C
+  ha2:
+    charge: 0.14417001
+    element: H
+  ha4:
+    charge: 0.14417001
+    element: H
+  ha6:
+    charge: 0.16202
+    element: H
+TMC_T_0P_2:
+  C1:
+    charge: 0.90746999
+    element: C
+  C2:
+    charge: 0.70420999
+    element: C
+  C3:
+    charge: 0.90746999
+    element: C
+  O1:
+    charge: -0.85859
+    element: O
+  O2:
+    charge: -0.62942999
+    element: O
+  O3:
+    charge: -0.85859
+    element: O
+  O4:
+    charge: -0.85859
+    element: O
+  O5:
+    charge: -0.85859
+    element: O
+  ca1:
+    charge: -0.20075999833333336
+    element: C
+  ca2:
+    charge: -0.12035000833333337
+    element: C
+  ca3:
+    charge: -0.2533599983333334
+    element: C
+  ca4:
+    charge: -0.08853999833333337
+    element: C
+  ca5:
+    charge: -0.20075999833333336
+    element: C
+  ca6:
+    charge: -0.12035000833333337
+    element: C
+  ha2:
+    charge: 0.14417001
+    element: H
+  ha4:
+    charge: 0.16202
+    element: H
+  ha6:
+    charge: 0.14417001
+    element: H
+TMC_T_0P_3:
+  C1:
+    charge: 0.90746999
+    element: C
+  C2:
+    charge: 0.90746999
+    element: C
+  C3:
+    charge: 0.70420999
+    element: C
+  O1:
+    charge: -0.85859
+    element: O
+  O2:
+    charge: -0.85859
+    element: O
+  O3:
+    charge: -0.62942999
+    element: O
+  O4:
+    charge: -0.85859
+    element: O
+  O5:
+    charge: -0.85859
+    element: O
+  ca1:
+    charge: -0.20075999833333336
+    element: C
+  ca2:
+    charge: -0.08853999833333337
+    element: C
+  ca3:
+    charge: -0.20075999833333336
+    element: C
+  ca4:
+    charge: -0.12035000833333337
+    element: C
+  ca5:
+    charge: -0.2533599983333334
+    element: C
+  ca6:
+    charge: -0.12035000833333337
+    element: C
+  ha2:
+    charge: 0.16202
+    element: H
+  ha4:
+    charge: 0.14417001
+    element: H
+  ha6:
+    charge: 0.14417001
+    element: H
+TMC_T_1P_1_2:
+  C1:
+    charge: 0.68914998
+    element: C
+  C2:
+    charge: 0.66399998
+    element: C
+  C3:
+    charge: 0.91290999
+    element: C
+  O1:
+    charge: -0.59364002
+    element: O
+  O2:
+    charge: -0.58524
+    element: O
+  O3:
+    charge: -0.82042002
+    element: O
+  O4:
+    charge: -0.82042002
+    element: O
+  ca1:
+    charge: -0.22524164666666666
+    element: C
+  ca2:
+    charge: -0.10794164666666667
+    element: C
+  ca3:
+    charge: -0.21071164666666664
+    element: C
+  ca4:
+    charge: -0.047921646666666665
+    element: C
+  ca5:
+    charge: -0.19194165666666665
+    element: C
+  ca6:
+    charge: -0.054851646666666656
+    element: C
+  ha2:
+    charge: 0.13474
+    element: H
+  ha4:
+    charge: 0.18113001
+    element: H
+  ha6:
+    charge: 0.17602
+    element: H
+  ho2:
+    charge: 0.42839
+    element: H
+  oh2:
+    charge: -0.60641002
+    element: O
+TMC_T_1P_1_3:
+  C1:
+    charge: 0.68914998
+    element: C
+  C2:
+    charge: 0.91290999
+    element: C
+  C3:
+    charge: 0.66399998
+    element: C
+  O1:
+    charge: -0.59364002
+    element: O
+  O2:
+    charge: -0.82042002
+    element: O
+  O3:
+    charge: -0.58524
+    element: O
+  O4:
+    charge: -0.82042002
+    element: O
+  ca1:
+    charge: -0.22524164666666666
+    element: C
+  ca2:
+    charge: -0.047921646666666665
+    element: C
+  ca3:
+    charge: -0.19194165666666665
+    element: C
+  ca4:
+    charge: -0.10794164666666667
+    element: C
+  ca5:
+    charge: -0.21071164666666664
+    element: C
+  ca6:
+    charge: -0.054851646666666656
+    element: C
+  ha2:
+    charge: 0.18113001
+    element: H
+  ha4:
+    charge: 0.13474
+    element: H
+  ha6:
+    charge: 0.17602
+    element: H
+  ho3:
+    charge: 0.42839
+    element: H
+  oh3:
+    charge: -0.60641002
+    element: O
+TMC_T_1P_2_1:
+  C1:
+    charge: 0.66399998
+    element: C
+  C2:
+    charge: 0.68914998
+    element: C
+  C3:
+    charge: 0.91290999
+    element: C
+  O1:
+    charge: -0.58524
+    element: O
+  O2:
+    charge: -0.59364002
+    element: O
+  O3:
+    charge: -0.82042002
+    element: O
+  O4:
+    charge: -0.82042002
+    element: O
+  ca1:
+    charge: -0.21071164666666664
+    element: C
+  ca2:
+    charge: -0.10794164666666667
+    element: C
+  ca3:
+    charge: -0.22524164666666666
+    element: C
+  ca4:
+    charge: -0.054851646666666656
+    element: C
+  ca5:
+    charge: -0.19194165666666665
+    element: C
+  ca6:
+    charge: -0.047921646666666665
+    element: C
+  ha2:
+    charge: 0.13474
+    element: H
+  ha4:
+    charge: 0.17602
+    element: H
+  ha6:
+    charge: 0.18113001
+    element: H
+  ho1:
+    charge: 0.42839
+    element: H
+  oh1:
+    charge: -0.60641002
+    element: O
+TMC_T_1P_2_3:
+  C1:
+    charge: 0.91290999
+    element: C
+  C2:
+    charge: 0.68914998
+    element: C
+  C3:
+    charge: 0.66399998
+    element: C
+  O1:
+    charge: -0.82042002
+    element: O
+  O2:
+    charge: -0.59364002
+    element: O
+  O3:
+    charge: -0.58524
+    element: O
+  O4:
+    charge: -0.82042002
+    element: O
+  ca1:
+    charge: -0.19194165666666665
+    element: C
+  ca2:
+    charge: -0.047921646666666665
+    element: C
+  ca3:
+    charge: -0.22524164666666666
+    element: C
+  ca4:
+    charge: -0.054851646666666656
+    element: C
+  ca5:
+    charge: -0.21071164666666664
+    element: C
+  ca6:
+    charge: -0.10794164666666667
+    element: C
+  ha2:
+    charge: 0.18113001
+    element: H
+  ha4:
+    charge: 0.17602
+    element: H
+  ha6:
+    charge: 0.13474
+    element: H
+  ho3:
+    charge: 0.42839
+    element: H
+  oh3:
+    charge: -0.60641002
+    element: O
+TMC_T_1P_3_1:
+  C1:
+    charge: 0.66399998
+    element: C
+  C2:
+    charge: 0.91290999
+    element: C
+  C3:
+    charge: 0.68914998
+    element: C
+  O1:
+    charge: -0.58524
+    element: O
+  O2:
+    charge: -0.82042002
+    element: O
+  O3:
+    charge: -0.59364002
+    element: O
+  O4:
+    charge: -0.82042002
+    element: O
+  ca1:
+    charge: -0.21071164666666664
+    element: C
+  ca2:
+    charge: -0.054851646666666656
+    element: C
+  ca3:
+    charge: -0.19194165666666665
+    element: C
+  ca4:
+    charge: -0.10794164666666667
+    element: C
+  ca5:
+    charge: -0.22524164666666666
+    element: C
+  ca6:
+    charge: -0.047921646666666665
+    element: C
+  ha2:
+    charge: 0.17602
+    element: H
+  ha4:
+    charge: 0.13474
+    element: H
+  ha6:
+    charge: 0.18113001
+    element: H
+  ho1:
+    charge: 0.42839
+    element: H
+  oh1:
+    charge: -0.60641002
+    element: O
+TMC_T_1P_3_2:
+  C1:
+    charge: 0.91290999
+    element: C
+  C2:
+    charge: 0.66399998
+    element: C
+  C3:
+    charge: 0.68914998
+    element: C
+  O1:
+    charge: -0.82042002
+    element: O
+  O2:
+    charge: -0.58524
+    element: O
+  O3:
+    charge: -0.59364002
+    element: O
+  O4:
+    charge: -0.82042002
+    element: O
+  ca1:
+    charge: -0.19194165666666665
+    element: C
+  ca2:
+    charge: -0.054851646666666656
+    element: C
+  ca3:
+    charge: -0.21071164666666664
+    element: C
+  ca4:
+    charge: -0.047921646666666665
+    element: C
+  ca5:
+    charge: -0.22524164666666666
+    element: C
+  ca6:
+    charge: -0.10794164666666667
+    element: C
+  ha2:
+    charge: 0.17602
+    element: H
+  ha4:
+    charge: 0.18113001
+    element: H
+  ha6:
+    charge: 0.13474
+    element: H
+  ho2:
+    charge: 0.42839
+    element: H
+  oh2:
+    charge: -0.60641002
+    element: O
+TMC_T_2P_1:
+  C1:
+    charge: 0.68373
+    element: C
+  C2:
+    charge: 0.65314
+    element: C
+  C3:
+    charge: 0.65314
+    element: C
+  O1:
+    charge: -0.57339001
+    element: O
+  O2:
+    charge: -0.53921998
+    element: O
+  O3:
+    charge: -0.53921998
+    element: O
+  ca1:
+    charge: -0.19950334833333333
+    element: C
+  ca2:
+    charge: -0.033753338333333334
+    element: C
+  ca3:
+    charge: -0.18204333833333333
+    element: C
+  ca4:
+    charge: -0.033753338333333334
+    element: C
+  ca5:
+    charge: -0.18204333833333333
+    element: C
+  ca6:
+    charge: -0.017843338333333333
+    element: C
+  ha2:
+    charge: 0.17549
+    element: H
+  ha4:
+    charge: 0.17549
+    element: H
+  ha6:
+    charge: 0.18316
+    element: H
+  ho2:
+    charge: 0.45265001
+    element: H
+  ho3:
+    charge: 0.45265001
+    element: H
+  oh2:
+    charge: -0.60354001
+    element: O
+  oh3:
+    charge: -0.60354001
+    element: O
+TMC_T_2P_2:
+  C1:
+    charge: 0.65314
+    element: C
+  C2:
+    charge: 0.68373
+    element: C
+  C3:
+    charge: 0.65314
+    element: C
+  O1:
+    charge: -0.53921998
+    element: O
+  O2:
+    charge: -0.57339001
+    element: O
+  O3:
+    charge: -0.53921998
+    element: O
+  ca1:
+    charge: -0.18204333833333333
+    element: C
+  ca2:
+    charge: -0.033753338333333334
+    element: C
+  ca3:
+    charge: -0.19950334833333333
+    element: C
+  ca4:
+    charge: -0.017843338333333333
+    element: C
+  ca5:
+    charge: -0.18204333833333333
+    element: C
+  ca6:
+    charge: -0.033753338333333334
+    element: C
+  ha2:
+    charge: 0.17549
+    element: H
+  ha4:
+    charge: 0.18316
+    element: H
+  ha6:
+    charge: 0.17549
+    element: H
+  ho1:
+    charge: 0.45265001
+    element: H
+  ho3:
+    charge: 0.45265001
+    element: H
+  oh1:
+    charge: -0.60354001
+    element: O
+  oh3:
+    charge: -0.60354001
+    element: O
+TMC_T_2P_3:
+  C1:
+    charge: 0.65314
+    element: C
+  C2:
+    charge: 0.65314
+    element: C
+  C3:
+    charge: 0.68373
+    element: C
+  O1:
+    charge: -0.53921998
+    element: O
+  O2:
+    charge: -0.53921998
+    element: O
+  O3:
+    charge: -0.57339001
+    element: O
+  ca1:
+    charge: -0.18204333833333333
+    element: C
+  ca2:
+    charge: -0.017843338333333333
+    element: C
+  ca3:
+    charge: -0.18204333833333333
+    element: C
+  ca4:
+    charge: -0.033753338333333334
+    element: C
+  ca5:
+    charge: -0.19950334833333333
+    element: C
+  ca6:
+    charge: -0.033753338333333334
+    element: C
+  ha2:
+    charge: 0.18316
+    element: H
+  ha4:
+    charge: 0.17549
+    element: H
+  ha6:
+    charge: 0.17549
+    element: H
+  ho1:
+    charge: 0.45265001
+    element: H
+  ho2:
+    charge: 0.45265001
+    element: H
+  oh1:
+    charge: -0.60354001
+    element: O
+  oh2:
+    charge: -0.60354001
+    element: O
