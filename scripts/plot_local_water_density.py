@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from tqdm import tqdm
+from pathlib import Path
+import ast
 
 import matplotlib.colors as mcolors
 from matplotlib.collections import EllipseCollection
@@ -21,7 +24,8 @@ element_colors = {
     'C': '#909090',   # Gray
     'N': '#3050F8',   # Blue
     'O': '#FF0D0D',   # Red
-    'H': '#FFFFFF',   # White
+    # 'H': '#FFFFFF',   # White
+    'H': '#000000',   # Black
     'Cl': '#1FF01F',  # Green
     'Na': '#AB5CF2',  # Purple
 }
@@ -38,6 +42,32 @@ vdw_radii = {
     'S': 1.80,
     'P': 1.80,
 }
+
+def parse_bonded_indices(value):
+    # Already parsed
+    if isinstance(value, (list, tuple, np.ndarray)):
+        return [int(x) for x in value]
+
+    # Missing/empty
+    if pd.isna(value):
+        return []
+
+    s = str(value).strip()
+    if s in ("", "[]"):
+        return []
+
+    # Try Python-list format first, e.g. "[1, 2, 3]"
+    try:
+        parsed = ast.literal_eval(s)
+        if isinstance(parsed, (list, tuple, np.ndarray)):
+            return [int(x) for x in parsed]
+    except (ValueError, SyntaxError):
+        pass
+
+    # Fallback for NumPy-style string, e.g. "[1 2 3]"
+    s = s.strip("[]").replace(",", " ")
+    return np.fromstring(s, sep=" ", dtype=int).tolist()
+
 
 def transform_to_plane(positions, point1, point2, point3):
     """
@@ -110,7 +140,7 @@ def add_alpha(hex_color, alpha):
     return (r, g, b, alpha)
 
 
-def plot_atoms(x, y, alpha, elements, radii, ax=None, xlabel='x', ylabel='y', visualization_cutoff=5, atom_indices=None, bonded_indices=None):
+def plot_atoms(x, y, alpha, elements, radii, filled=True, edgecolors='k', ax=None, xlabel='x', ylabel='y', visualization_cutoff=5, atom_indices=None, bonded_indices=None):
     '''
     Plot a 2D projection of atoms as circles with optional bonds
     
@@ -124,6 +154,10 @@ def plot_atoms(x, y, alpha, elements, radii, ax=None, xlabel='x', ylabel='y', vi
         Element types for coloring
     radii : array-like
         Radii for circle sizes
+    filled : bool
+        Whether to fill the circles (True) or just draw edges (False)
+    edgecolors : str or array-like
+        Edge color(s) for the circles, default is 'k' (black)
     ax : matplotlib.axes.Axes, optional
         Axes to plot on
     xlabel, ylabel : str
@@ -144,7 +178,10 @@ def plot_atoms(x, y, alpha, elements, radii, ax=None, xlabel='x', ylabel='y', vi
     alphas = 0.2 + 0.8 * (1 - (alpha - vmin) / (vmax - vmin))  # closer → more opaque
 
     # build per-point RGBA using your element palette
-    colors = [add_alpha(element_colors[e], a) for e, a in zip(elements, alphas)]
+    if filled:
+        colors = [add_alpha(element_colors[e], a) for e, a in zip(elements, alphas)]
+    else:
+        colors = [add_alpha('#FFFFFF', 0.0) for _ in alphas]  # white fill with transparency
 
     if ax is None:
         fig, ax = plt.subplots()
@@ -167,8 +204,8 @@ def plot_atoms(x, y, alpha, elements, radii, ax=None, xlabel='x', ylabel='y', vi
         units='xy',                # key: sizes in data coords
         offsets=np.column_stack((x, y)),
         transOffset=ax.transData,
-        facecolors=colors,
-        edgecolors='k', linewidths=0.8,
+        facecolors=colors, 
+        edgecolors=edgecolors, linewidths=0.8,
         zorder=2  # atoms on top of bonds
     )
     ax.add_collection(ec)
@@ -252,7 +289,6 @@ if __name__ == "__main__":
     parser.add_argument('--distance_cutoff', type=float, default=8.0, help='Distance cutoff in angstroms for capped_distance calculations')
     parser.add_argument('--z_threshold', type=float, default=2.25, help='Z-plane threshold in angstroms for filtering water density')
     parser.add_argument('--visualization_cutoff', type=float, default=5.0, help='Cutoff in angstroms for plotting nearby atoms')
-    parser.add_argument('--density', choices=['kde', 'hist'], default='kde', help='Use KDE or 2D histogram for density plots')
     parser.add_argument('--panels', choices=['all', 'left'], default='all', help='Show all three panels or just the large left panel (for histogram mode)')
     parser.add_argument('--vmin', type=float, default=None, help='Minimum value for colorbar (auto-calculated if not specified)')
     parser.add_argument('--vmax', type=float, default=None, help='Maximum value for colorbar (auto-calculated if not specified)')
@@ -267,7 +303,11 @@ if __name__ == "__main__":
     distance_cutoff = args.distance_cutoff
     z_threshold = args.z_threshold
     visualization_cutoff = args.visualization_cutoff
-    density_mode = args.density
+    compare_z_filtering = False
+
+    ##############################################################
+    ###################### LOAD TRAJECTORY #######################
+    ##############################################################
 
     print(f'Loading {tpr} with trajectory {xtc}')
     u = mda.Universe(tpr, xtc)
@@ -281,65 +321,85 @@ if __name__ == "__main__":
     ]
     u.trajectory.add_transformations(*workflow)
 
-    # get the coordinates and distances for all frames
-    df = pd.DataFrame(columns=['x', 'y', 'z', 'distance_to_atom', 'frame'])
-    df_cl = pd.DataFrame(columns=['x', 'y', 'z', 'frame'])
-    for ts in u.trajectory:
+    ##############################################################
+    ################# CREATE NEIGHBOR DATAFRAME ##################
+    ##############################################################
 
-        pairs, distances = capped_distance(my_atom.position, u.atoms, max_cutoff=distance_cutoff, box=u.dimensions)
+    if Path(f'local_water_density_around_{selection.replace(" ", "_")}_{idx}.csv').exists():
+        print(f"Found existing CSV file for selection '{selection}' and index {idx}. Loading...")
+        df = pd.read_csv(f'local_water_density_around_{selection.replace(" ", "_")}_{idx}.csv',
+                         converters={'bonded_indices': parse_bonded_indices})
+    else:
+
+        # get the coordinates and distances for all frames
+        df = pd.DataFrame(columns=['x', 'y', 'z', 'distance_to_atom', 'frame'])
+        for ts in tqdm(u.trajectory):
+
+            pairs, distances = capped_distance(my_atom.position, u.atoms, max_cutoff=distance_cutoff, box=u.dimensions)
+            my_neighbors = u.atoms[pairs[:,1]]
+            tmp = pd.DataFrame(my_neighbors.positions, columns=['x', 'y', 'z'], index=my_neighbors.indices)
+            tmp['element'] = my_neighbors.elements
+            tmp['type'] = my_neighbors.types
+            tmp['distance_to_atom'] = distances[(pairs[:,0] == 0)]
+            tmp['frame'] = u.trajectory.frame
+            tmp['my_atom_index'] = my_neighbors.indices
+            tmp['bonded_indices'] = [atom.bonded_atoms.indices for atom in my_neighbors]
+            df = pd.concat([df, tmp])
+
+        # transform coordinates to plane defined by 3 closest atoms to my_atom in each frame
+        df = add_plane_aligned_coords(df)
+        df['vdw_radius'] = df['element'].map(vdw_radii)
+        df.to_csv(f'local_water_density_around_{selection.replace(" ", "_")}_{idx}.csv', index=False)
+
+    ##############################################################
+    #################### COMPARE Z-FILTERING #####################
+    ##############################################################
+
+    if compare_z_filtering:
+
+        # first, compare the density plots with and without z filtering
+        frame0 = df.query(f'frame == 0 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
+        u.trajectory[0]  # set to first frame for distance calculations
+        pairs,_ = capped_distance(my_atom.position, u.atoms, max_cutoff=distance_cutoff, box=u.dimensions)
         my_neighbors = u.atoms[pairs[:,1]]
-        tmp = pd.DataFrame(my_neighbors.positions, columns=['x', 'y', 'z'], index=my_neighbors.indices)
-        tmp['element'] = my_neighbors.elements
-        tmp['type'] = my_neighbors.types
-        tmp['distance_to_atom'] = distances[(pairs[:,0] == 0)]
-        tmp['frame'] = u.trajectory.frame
-        tmp['my_atom_index'] = my_neighbors.indices
-        tmp['bonded_indices'] = [atom.bonded_atoms.indices for atom in my_neighbors]
-        df = pd.concat([df, tmp])
 
-    # transform coordinates to plane defined by 3 closest atoms to my_atom in each frame
-    df = add_plane_aligned_coords(df)
-    df['vdw_radius'] = df['element'].map(vdw_radii)
+        # pick a value to map to transparency (here z_plane) and normalize to [0.2, 1.0]
+        alpha = frame0['z_plane']
+        x = frame0['x_plane'].to_numpy()
+        y = frame0['y_plane'].to_numpy()
+        r = frame0['vdw_radius'].to_numpy() * 0.5  # radius in data units, scaled to 50%
 
-    # first, compare the density plots with and without z filtering
-    frame0 = df.query(f'frame == 0 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
-    u.trajectory[0]  # set to first frame for distance calculations
-    pairs,_ = capped_distance(my_atom.position, u.atoms, max_cutoff=distance_cutoff, box=u.dimensions)
-    my_neighbors = u.atoms[pairs[:,1]]
+        # plot water density and atoms
+        df_ow = df.query("type == 'OW'").copy()
+        df_ow_filtered = df_ow[np.abs(df_ow['z_plane']) <= z_threshold]
 
-    # pick a value to map to transparency (here z_plane) and normalize to [0.2, 1.0]
-    alpha = frame0['z_plane']
-    x = frame0['x_plane'].to_numpy()
-    y = frame0['y_plane'].to_numpy()
-    r = frame0['vdw_radius'].to_numpy() * 0.5  # radius in data units, scaled to 50%
+        print(f"Original OW atoms: {df_ow.shape[0]}")
+        print(f"Filtered OW atoms (|z| <= {z_threshold}): {df_ow_filtered.shape[0]}")
 
-    # plot water density and atoms
-    df_ow = df.query("type == 'OW'").copy()
-    df_ow_filtered = df_ow[np.abs(df_ow['z_plane']) <= z_threshold]
+        # Original
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+        sns.histplot(data=df_ow, x='x_plane', y='y_plane', bins=50, stat='count', cmap='Blues', ax=ax1, cbar=True)
+        ax1.set_title('All OW atoms')
+        ax1.set_xlim(-visualization_cutoff, visualization_cutoff); ax1.set_ylim(-visualization_cutoff, visualization_cutoff)
+        ax1.set_xticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1)); ax1.set_yticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1))
+        ax1.set_aspect('equal')
 
-    print(f"Original OW atoms: {df_ow.shape[0]}")
-    print(f"Filtered OW atoms (|z| <= {z_threshold}): {df_ow_filtered.shape[0]}")
+        # Filtered by z_plane
+        sns.histplot(data=df_ow_filtered, x='x_plane', y='y_plane', bins=50, stat='count', cmap='Blues', ax=ax2, cbar=True)
+        ax2.set_title(f'OW atoms with |z| ≤ {z_threshold} Å')
+        ax2.set_xlim(-visualization_cutoff, visualization_cutoff); ax2.set_ylim(-visualization_cutoff, visualization_cutoff)
+        ax2.set_xticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1)); ax2.set_yticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1))
+        ax2.set_aspect('equal')
 
-    # Original
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-    sns.histplot(data=df_ow, x='x_plane', y='y_plane', bins=50, stat='count', cmap='Blues', ax=ax1, cbar=True)
-    ax1.set_title('All OW atoms')
-    ax1.set_xlim(-visualization_cutoff, visualization_cutoff); ax1.set_ylim(-visualization_cutoff, visualization_cutoff)
-    ax1.set_xticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1)); ax1.set_yticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1))
-    ax1.set_aspect('equal')
+        sns.scatterplot(data=frame0, x='x_plane', y='y_plane', hue='element', palette=element_colors, s=100, edgecolor='k', ax=ax1)
+        sns.scatterplot(data=frame0, x='x_plane', y='y_plane', hue='element', palette=element_colors, s=100, edgecolor='k', ax=ax2)
 
-    # Filtered by z_plane
-    sns.histplot(data=df_ow_filtered, x='x_plane', y='y_plane', bins=50, stat='count', cmap='Blues', ax=ax2, cbar=True)
-    ax2.set_title(f'OW atoms with |z| ≤ {z_threshold} Å')
-    ax2.set_xlim(-visualization_cutoff, visualization_cutoff); ax2.set_ylim(-visualization_cutoff, visualization_cutoff)
-    ax2.set_xticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1)); ax2.set_yticks(np.arange(-visualization_cutoff, visualization_cutoff+1, 1))
-    ax2.set_aspect('equal')
+        plt.tight_layout()
+        plt.show()
 
-    sns.scatterplot(data=frame0, x='x_plane', y='y_plane', hue='element', palette=element_colors, s=100, edgecolor='k', ax=ax1)
-    sns.scatterplot(data=frame0, x='x_plane', y='y_plane', hue='element', palette=element_colors, s=100, edgecolor='k', ax=ax2)
-
-    plt.tight_layout()
-    plt.show()
+    ##############################################################
+    ###################### PLOT 2D DENSITY #######################
+    ##############################################################
 
     # Now make the 3-panel figure with z-filtered water density
     if args.panels == 'all':
@@ -348,18 +408,18 @@ if __name__ == "__main__":
 
         # Left panel (spans both rows)
         ax_left = fig.add_subplot(gs[:, 0])
-
         # Right panels (stacked)
         ax_right_top = fig.add_subplot(gs[0, 1])
         ax_right_bottom = fig.add_subplot(gs[1, 1])
-    else:  # args.panels == 'left'
+
+    elif args.panels == 'left':
         fig, ax_left = plt.subplots(figsize=(6, 6))
         ax_right_top = None
         ax_right_bottom = None
 
     # Data setup
     df_ow = df.query("type == 'OW'").copy()
-    frame0 = df.query(f'frame == 0 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
+    frame0 = df.query(f'type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
     atom_indices = frame0['my_atom_index'].to_numpy()
     bonded_indices = frame0['bonded_indices'].to_numpy()
     x = frame0['x_plane'].to_numpy()
@@ -368,72 +428,87 @@ if __name__ == "__main__":
     r = frame0['vdw_radius'].to_numpy() * 0.5
     df_ow_filtered = df_ow[np.abs(df_ow['z_plane']) <= z_threshold]
 
-    if density_mode == 'kde':
-        vmin = args.vmin if args.vmin is not None else 0
-        vmax = args.vmax if args.vmax is not None else 1
-        levels = np.linspace(vmin, vmax, 50)
+    hist_bins = 75
+    hist_range = [[-visualization_cutoff, visualization_cutoff], [-visualization_cutoff, visualization_cutoff]]
 
-        alpha_xy = frame0['z_plane']
-        sns.kdeplot(data=df_ow_filtered, x='x_plane', y='y_plane', fill=True, cmap='Blues', ax=ax_left, levels=levels, thresh=0)
-        plot_atoms(x, y, alpha_xy, frame0['element'], r, ax=ax_left, xlabel='x', ylabel='y', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
-        ax_left.text(0.98, 0.98, ha='right', va='top', transform=ax_left.transAxes,
-                    s=f'Water |z| ≤ {z_threshold} Å of Cl', fontsize=12)
+    h_xy, xe_xy, ye_xy = np.histogram2d(df_ow_filtered['x_plane'], df_ow_filtered['y_plane'], bins=hist_bins, range=hist_range)
+    h_xz, xe_xz, ze_xz = np.histogram2d(df_ow['x_plane'], df_ow['z_plane'], bins=hist_bins, range=hist_range)
+    h_yz, ye_yz, ze_yz = np.histogram2d(df_ow['y_plane'], df_ow['z_plane'], bins=hist_bins, range=hist_range)
 
-        if args.panels == 'all':
-            # Right top: x-z projection
-            alpha_xz = frame0['y_plane']
-            sns.kdeplot(data=df_ow, x='x_plane', y='z_plane', fill=True, cmap='Blues', ax=ax_right_top, levels=levels, thresh=0)
-            plot_atoms(x, z, alpha_xz, frame0['element'], r, ax=ax_right_top, xlabel='x', ylabel='z', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
-            ax_right_top.tick_params(axis='both', labelsize=8)
+    if args.vmax is None:
+        vmax = max(h_xy.max(), h_xz.max(), h_yz.max()) if max(h_xy.max(), h_xz.max(), h_yz.max()) > 0 else 1
+    else:
+        vmax = args.vmax
+    vmin = args.vmin if args.vmin is not None else 0
 
-            # Right bottom: y-z projection
-            alpha_yz = frame0['x_plane']
-            sns.kdeplot(data=df_ow, x='y_plane', y='z_plane', fill=True, cmap='Blues', ax=ax_right_bottom, levels=levels, thresh=0)
-            plot_atoms(y, z, alpha_yz, frame0['element'], r, ax=ax_right_bottom, xlabel='y', ylabel='z', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
-            ax_right_bottom.tick_params(axis='both', labelsize=8)
+    # water density
+    pcm_xy = ax_left.pcolormesh(xe_xy, ye_xy, h_xy.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
 
-        sm = plt.cm.ScalarMappable(cmap='Blues', norm=plt.Normalize(vmin=vmin, vmax=vmax))
-        if args.panels == 'all':
-            cbar = plt.colorbar(sm, ax=[ax_left, ax_right_top, ax_right_bottom], location='top', shrink=0.8, pad=0.02)
-        else:
-            cbar = plt.colorbar(sm, ax=ax_left, location='right', shrink=0.8, pad=0.02)
-        cbar.set_label('KDE density')
+    n_frames = len(frame0['frame'].unique())
+    norm = mcolors.Normalize(vmin=0, vmax=50, clip=True)
+    # Overlay one histogram per element, where each colormap darkens toward that element's color.
+    for element in sorted(frame0['element'].dropna().unique()):
+        element_df = frame0[frame0['element'] == element]
+        if element_df.empty:
+            continue
 
-    else:  # density_mode == 'hist'
-        hist_bins = 75
-        hist_range = [[-visualization_cutoff, visualization_cutoff], [-visualization_cutoff, visualization_cutoff]]
+        base_color = element_colors.get(element, '#808080')
+        element_cmap = mcolors.LinearSegmentedColormap.from_list(
+            f'{element}_gradient',
+            [add_alpha('#FFFFFF', 0.0), add_alpha(base_color, 0.75)],
+            N=256,
+        )
 
-        h_xy, xe_xy, ye_xy = np.histogram2d(df_ow_filtered['x_plane'], df_ow_filtered['y_plane'], bins=hist_bins, range=hist_range)
-        h_xz, xe_xz, ze_xz = np.histogram2d(df_ow['x_plane'], df_ow['z_plane'], bins=hist_bins, range=hist_range)
-        h_yz, ye_yz, ze_yz = np.histogram2d(df_ow['y_plane'], df_ow['z_plane'], bins=hist_bins, range=hist_range)
+        h_elem, xe_elem, ye_elem = np.histogram2d(
+            element_df['x_plane'],
+            element_df['y_plane'],
+            bins=hist_bins,
+            range=hist_range,
+        )
 
-        if args.vmax is None:
-            vmax = max(h_xy.max(), h_xz.max(), h_yz.max()) if max(h_xy.max(), h_xz.max(), h_yz.max()) > 0 else 1
-        else:
-            vmax = args.vmax
-        vmin = args.vmin if args.vmin is not None else 0
+        print(f"Element {element}: {h_elem.sum()} counts in histogram, max bin: {h_elem.max()}.")
+        ax_left.pcolormesh(
+            xe_elem,
+            ye_elem,
+            h_elem.T,
+            cmap=element_cmap,
+            shading='auto',
+            norm=norm
+        )
 
-        pcm_xy = ax_left.pcolormesh(xe_xy, ye_xy, h_xy.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
-        plot_atoms(x, y, frame0['z_plane'], frame0['element'], r, ax=ax_left, xlabel='x', ylabel='y', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
-        ax_left.text(0.98, 0.98, ha='right', va='top', transform=ax_left.transAxes,
-                    s=f'Water |z| ≤ {z_threshold} Å of Cl', fontsize=12)
+    frame0 = df.query(f'frame == 0 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
+    atom_indices = frame0['my_atom_index'].to_numpy()
+    bonded_indices = frame0['bonded_indices'].to_numpy()
+    x = frame0['x_plane'].to_numpy()
+    y = frame0['y_plane'].to_numpy()
+    z = frame0['z_plane'].to_numpy()
+    r = frame0['vdw_radius'].to_numpy() * 0.5
+    plot_atoms(x, y, z, frame0['element'], r, filled=False, edgecolors=[element_colors[elem] for elem in frame0['element']],
+               ax=ax_left, xlabel='x', ylabel='y', visualization_cutoff=visualization_cutoff, 
+               atom_indices=atom_indices, bonded_indices=bonded_indices)
+    
+    anchors = frame0['plane_anchor']
+    ax_left.scatter(x[anchors], y[anchors], s=50, facecolors='yellow', edgecolors='k', marker='*')
 
-        if args.panels == 'all':
-            pcm_xz = ax_right_top.pcolormesh(xe_xz, ze_xz, h_xz.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
-            plot_atoms(x, z, frame0['y_plane'], frame0['element'], r, ax=ax_right_top, xlabel='x', ylabel='z', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
-            ax_right_top.tick_params(axis='both', labelsize=8)
 
-            pcm_yz = ax_right_bottom.pcolormesh(ye_yz, ze_yz, h_yz.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
-            plot_atoms(y, z, frame0['x_plane'], frame0['element'], r, ax=ax_right_bottom, xlabel='y', ylabel='z', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
-            ax_right_bottom.tick_params(axis='both', labelsize=8)
+    sm = plt.cm.ScalarMappable(cmap='Blues', norm=plt.Normalize(vmin=vmin, vmax=vmax))
+    sm.set_array([])
 
-        sm = plt.cm.ScalarMappable(cmap='Blues', norm=plt.Normalize(vmin=vmin, vmax=vmax))
-        sm.set_array([])
-        if args.panels == 'all':
-            cbar = plt.colorbar(sm, ax=[ax_left, ax_right_top, ax_right_bottom], location='top', shrink=0.8, pad=0.02)
-        else:
-            cbar = plt.colorbar(sm, ax=ax_left, location='right', shrink=0.8, pad=0.02)
+    if args.panels == 'all':
+        pcm_xz = ax_right_top.pcolormesh(xe_xz, ze_xz, h_xz.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
+        plot_atoms(x, z, frame0['y_plane'], frame0['element'], r, ax=ax_right_top, xlabel='x', ylabel='z', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
+        ax_right_top.tick_params(axis='both', labelsize=8)
+
+        pcm_yz = ax_right_bottom.pcolormesh(ye_yz, ze_yz, h_yz.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
+        plot_atoms(y, z, frame0['x_plane'], frame0['element'], r, ax=ax_right_bottom, xlabel='y', ylabel='z', visualization_cutoff=visualization_cutoff, atom_indices=atom_indices, bonded_indices=bonded_indices)
+        ax_right_bottom.tick_params(axis='both', labelsize=8)
+        cbar = plt.colorbar(sm, ax=[ax_left, ax_right_top, ax_right_bottom], location='top', shrink=0.8, pad=0.02)
         cbar.set_label('Counts')
 
-    plt.savefig(f'water_density_around_{selection.replace(" ", "_")}_{idx}_{density_mode}.png', dpi=300, bbox_inches='tight')
+    else:
+        cbar = plt.colorbar(sm, ax=ax_left, location='right', shrink=0.8, pad=0.02)
+        cbar.set_label('Counts')
+    
+    ax_left.set_xlim(-5, 5); ax_left.set_ylim(-5, 5)
+    plt.savefig(f'water_density_around_{selection.replace(" ", "_")}_{idx}_hist.png', dpi=300, bbox_inches='tight')
     plt.show()
