@@ -309,17 +309,21 @@ if __name__ == "__main__":
     ###################### LOAD TRAJECTORY #######################
     ##############################################################
 
-    print(f'Loading {tpr} with trajectory {xtc}')
-    u = mda.Universe(tpr, xtc)
-    ag = get_atom_group(selection, u)
-    my_atom = ag[idx]
+    try:
+        print(f'Loading {tpr} with trajectory {xtc}')
+        u = mda.Universe(tpr, xtc)
+        ag = get_atom_group(selection, u)
+        my_atom = ag[idx]
 
-    # center on my_atom
-    workflow = [
-        trans.center_in_box(mda.AtomGroup([my_atom])),
-        trans.wrap(u.atoms)
-    ]
-    u.trajectory.add_transformations(*workflow)
+        # center on my_atom
+        workflow = [
+            trans.center_in_box(mda.AtomGroup([my_atom])),
+            trans.wrap(u.atoms)
+        ]
+        u.trajectory.add_transformations(*workflow)
+    except:
+        print(f"WARNING: Could not load topology ({tpr}) or trajectory ({xtc}).")
+        print(f"WARNING: Will plot correctly if local_water_density_around_{selection.replace(' ', '_')}_{idx}.csv exists and compare_z_filtering is False.")
 
     ##############################################################
     ################# CREATE NEIGHBOR DATAFRAME ##################
