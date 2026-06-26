@@ -24,8 +24,8 @@ element_colors = {
     'C': '#909090',   # Gray
     'N': '#3050F8',   # Blue
     'O': '#FF0D0D',   # Red
-    # 'H': '#FFFFFF',   # White
-    'H': '#000000',   # Black
+    'H': '#FFFFFF',   # White
+    # 'H': '#000000',   # Black
     'Cl': '#1FF01F',  # Green
     'Na': '#AB5CF2',  # Purple
 }
@@ -69,7 +69,7 @@ def parse_bonded_indices(value):
     return np.fromstring(s, sep=" ", dtype=int).tolist()
 
 
-def transform_to_plane(positions, point1, point2, point3):
+def transform_to_plane(positions, point1, point2, point3, center=None):
     """
     Transform coordinates so that 3 points define the x-y plane.
     
@@ -106,9 +106,13 @@ def transform_to_plane(positions, point1, point2, point3):
     # Create rotation matrix (basis vectors as rows)
     rotation_matrix = np.array([x_axis, y_axis, z_axis])
     
-    # Center coordinates on p1 (origin of new frame)
-    centered = positions - p1
-    
+    if center is None:
+        # Center coordinates on p1 (origin of new frame)
+        centered = positions - p1
+    else:
+        # Center coordinates on the specified center
+        centered = positions - center
+
     # Apply rotation
     transformed = centered @ rotation_matrix.T
     
@@ -121,10 +125,12 @@ def add_plane_aligned_coords(df):
     for frame, g in df.groupby('frame'):
         if len(g) < 3:
             continue  # not enough atoms to define a plane
-        anchors = g.nsmallest(3, 'distance_to_atom')[['x', 'y', 'z']]
+        potential_anchor_atoms = g.query("type in ['ca', 'n', 'nh', 'cl']")
+        anchors = potential_anchor_atoms.nsmallest(3, 'distance_to_atom')[['x', 'y', 'z']]
+        center = g.nsmallest(1, 'distance_to_atom')[['x', 'y', 'z']].values
         p1, p2, p3 = anchors.values  # ordered closest → farther
         coords = g[['x', 'y', 'z']].values
-        rotated = transform_to_plane(coords, p1, p2, p3)
+        rotated = transform_to_plane(coords, p1, p2, p3, center=center)
 
         g_out = g.copy()
         g_out[['x_plane', 'y_plane', 'z_plane']] = rotated
@@ -423,7 +429,7 @@ if __name__ == "__main__":
 
     # Data setup
     df_ow = df.query("type == 'OW'").copy()
-    frame0 = df.query(f'type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
+    frame0 = df.query(f'frame == 2002 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
     atom_indices = frame0['my_atom_index'].to_numpy()
     bonded_indices = frame0['bonded_indices'].to_numpy()
     x = frame0['x_plane'].to_numpy()
@@ -448,51 +454,13 @@ if __name__ == "__main__":
     # water density
     pcm_xy = ax_left.pcolormesh(xe_xy, ye_xy, h_xy.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
 
-    n_frames = len(frame0['frame'].unique())
-    norm = mcolors.Normalize(vmin=0, vmax=50, clip=True)
-    # Overlay one histogram per element, where each colormap darkens toward that element's color.
-    for element in sorted(frame0['element'].dropna().unique()):
-        element_df = frame0[frame0['element'] == element]
-        if element_df.empty:
-            continue
-
-        base_color = element_colors.get(element, '#808080')
-        element_cmap = mcolors.LinearSegmentedColormap.from_list(
-            f'{element}_gradient',
-            [add_alpha('#FFFFFF', 0.0), add_alpha(base_color, 0.75)],
-            N=256,
-        )
-
-        h_elem, xe_elem, ye_elem = np.histogram2d(
-            element_df['x_plane'],
-            element_df['y_plane'],
-            bins=hist_bins,
-            range=hist_range,
-        )
-
-        print(f"Element {element}: {h_elem.sum()} counts in histogram, max bin: {h_elem.max()}.")
-        ax_left.pcolormesh(
-            xe_elem,
-            ye_elem,
-            h_elem.T,
-            cmap=element_cmap,
-            shading='auto',
-            norm=norm
-        )
-
-    frame0 = df.query(f'frame == 2002 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy() # this needs to be hard-coded to match the saved CSV
-    atom_indices = frame0['my_atom_index'].to_numpy()
-    bonded_indices = frame0['bonded_indices'].to_numpy()
-    x = frame0['x_plane'].to_numpy()
-    y = frame0['y_plane'].to_numpy()
-    z = frame0['z_plane'].to_numpy()
-    r = frame0['vdw_radius'].to_numpy() * 0.5
-    plot_atoms(x, y, z, frame0['element'], r, filled=False, edgecolors=[element_colors[elem] for elem in frame0['element']],
+    # plot atoms in the left panel
+    plot_atoms(x, y, z, frame0['element'], r, filled=True, edgecolors='k',
                ax=ax_left, xlabel='x', ylabel='y', visualization_cutoff=visualization_cutoff, 
                atom_indices=atom_indices, bonded_indices=bonded_indices)
     
     anchors = frame0['plane_anchor']
-    ax_left.scatter(x[anchors], y[anchors], s=50, facecolors='yellow', edgecolors='k', marker='*')
+    ax_left.scatter(x[anchors], y[anchors], s=100, facecolors='yellow', edgecolors='k', marker='*')
 
 
     sm = plt.cm.ScalarMappable(cmap='Blues', norm=plt.Normalize(vmin=vmin, vmax=vmax))
