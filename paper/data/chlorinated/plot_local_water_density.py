@@ -125,7 +125,7 @@ def add_plane_aligned_coords(df):
     for frame, g in df.groupby('frame'):
         if len(g) < 3:
             continue  # not enough atoms to define a plane
-        potential_anchor_atoms = g.query("type in ['ca', 'n', 'nh', 'cl']")
+        potential_anchor_atoms = g.query("type in ['ca', 'n', 'nh', 'cl', 'c']")
         anchors = potential_anchor_atoms.nsmallest(3, 'distance_to_atom')[['x', 'y', 'z']]
         center = g.nsmallest(1, 'distance_to_atom')[['x', 'y', 'z']].values
         p1, p2, p3 = anchors.values  # ordered closest → farther
@@ -281,6 +281,7 @@ def get_atom_group(selection, universe):
     else:
         raise ValueError(f'Unknown selection: {selection}')
 
+    print(f"Selected {len(ag)} atoms for selection '{selection}'")
     return ag
 
 
@@ -295,6 +296,7 @@ if __name__ == "__main__":
     parser.add_argument('--distance_cutoff', type=float, default=8.0, help='Distance cutoff in angstroms for capped_distance calculations')
     parser.add_argument('--z_threshold', type=float, default=2.25, help='Z-plane threshold in angstroms for filtering water density')
     parser.add_argument('--visualization_cutoff', type=float, default=5.0, help='Cutoff in angstroms for plotting nearby atoms')
+    parser.add_argument('--visualization_frame', type=int, default=0, help='Frame number to visualize (default: 0)')
     parser.add_argument('--panels', choices=['all', 'left'], default='all', help='Show all three panels or just the large left panel (for histogram mode)')
     parser.add_argument('--vmin', type=float, default=None, help='Minimum value for colorbar (auto-calculated if not specified)')
     parser.add_argument('--vmax', type=float, default=None, help='Maximum value for colorbar (auto-calculated if not specified)')
@@ -309,6 +311,7 @@ if __name__ == "__main__":
     distance_cutoff = args.distance_cutoff
     z_threshold = args.z_threshold
     visualization_cutoff = args.visualization_cutoff
+    visualization_frame = args.visualization_frame
     compare_z_filtering = False
 
     ##############################################################
@@ -330,6 +333,20 @@ if __name__ == "__main__":
     except:
         print(f"WARNING: Could not load topology ({tpr}) or trajectory ({xtc}).")
         print(f"WARNING: Will plot correctly if local_water_density_around_{selection.replace(' ', '_')}_{idx}.csv exists and compare_z_filtering is False.")
+
+    u.trajectory[visualization_frame]  # go to specified frame for distance calculations
+    nh2 = u.select_atoms(f'type nh')
+    hn_nh2 = u.select_atoms(f'(type hn) and (bonded group nh2)', nh2=nh2)
+    pairs, distances = capped_distance(ag, hn_nh2, max_cutoff=5, box=u.dimensions)
+    sorted_indices = np.argsort(distances)
+    print('\nClosest my_atom to NH2 pairs:')
+    print([f'{p1}-{p2}: {distances[sorted_indices][i]:.3f} Å' for i, (p1, p2) in enumerate(pairs[sorted_indices]) if p1 == idx])
+    print('\nClosest ag to NH2 pairs:')
+    for i in range(min(10, len(sorted_indices))):
+        pair = pairs[sorted_indices][i]
+        dist = distances[sorted_indices][i]
+        print(f"Pair: {pair}, Distance: {dist:.3f} Å")
+    print()
 
     ##############################################################
     ################# CREATE NEIGHBOR DATAFRAME ##################
@@ -368,8 +385,8 @@ if __name__ == "__main__":
     if compare_z_filtering:
 
         # first, compare the density plots with and without z filtering
-        frame0 = df.query(f'frame == 0 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
-        u.trajectory[0]  # set to first frame for distance calculations
+        frame0 = df.query(f'frame == {visualization_frame} and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
+        u.trajectory[visualization_frame]  # set to specified frame for distance calculations
         pairs,_ = capped_distance(my_atom.position, u.atoms, max_cutoff=distance_cutoff, box=u.dimensions)
         my_neighbors = u.atoms[pairs[:,1]]
 
@@ -429,7 +446,7 @@ if __name__ == "__main__":
 
     # Data setup
     df_ow = df.query("type == 'OW'").copy()
-    frame0 = df.query(f'frame == 0 and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
+    frame0 = df.query(f'frame == {visualization_frame} and type not in ["HW", "OW"] and distance_to_atom <= {visualization_cutoff}').copy()
     atom_indices = frame0['my_atom_index'].to_numpy()
     bonded_indices = frame0['bonded_indices'].to_numpy()
     x = frame0['x_plane'].to_numpy()
@@ -453,14 +470,17 @@ if __name__ == "__main__":
 
     # water density
     pcm_xy = ax_left.pcolormesh(xe_xy, ye_xy, h_xy.T, cmap='Blues', shading='auto', vmin=vmin, vmax=vmax)
-
-    # plot atoms on top of water density
+    print('Min density (counts) in xy-plane:', h_xy.min())
+    print('Max density (counts) in xy-plane:', h_xy.max())
+    
+    # plot atoms on top of the density
     plot_atoms(x, y, z, frame0['element'], r, filled=True, edgecolors='k',
                ax=ax_left, xlabel='x', ylabel='y', visualization_cutoff=visualization_cutoff, 
                atom_indices=atom_indices, bonded_indices=bonded_indices)
     
     anchors = frame0['plane_anchor']
     ax_left.scatter(x[anchors], y[anchors], s=100, facecolors='yellow', edgecolors='k', marker='*')
+
 
     sm = plt.cm.ScalarMappable(cmap='Blues', norm=plt.Normalize(vmin=vmin, vmax=vmax))
     sm.set_array([])
