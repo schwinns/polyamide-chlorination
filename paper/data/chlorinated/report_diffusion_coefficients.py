@@ -6,6 +6,7 @@ import pandas as pd
 import pickle
 from scipy import stats
 import statsmodels.api as sm
+from tqdm import tqdm
 
 import MDAnalysis as mda
 
@@ -15,31 +16,39 @@ def load_pickle(filename):
         return pickle.load(f)
     
 
-def bootstrap_water_diffusion_coefficients(diff, n_bootstraps=1000, start_pct=0.1, end_pct=0.5, plot=False):
+def bootstrap_water_diffusion_coefficients(diff, n_bootstraps=1000, start_time=None, end_time=None, plot=False):
     '''Bootstrap water diffusion coefficients from MSDs'''
 
     n_lagtimes = len(diff.lagtimes)
     n_waters = diff.msds_by_particle.shape[1]
 
-    val = np.quantile(diff.lagtimes, start_pct)
-    start_idx = np.where(diff.lagtimes >= val)[0][0]
-    val = np.quantile(diff.lagtimes, end_pct)
-    end_idx = np.where(diff.lagtimes <= val)[0][-1]
+    start_idx = np.where(diff.lagtimes >= start_time)[0][0]
+    end_idx = np.where(diff.lagtimes <= end_time)[0][-1]
 
-    X = diff.lagtimes[start_idx:end_idx]
-    X = sm.add_constant(X)
+    # X = diff.lagtimes[start_idx:end_idx]
+    # X = sm.add_constant(X)
+
+    x_vals = diff.lagtimes[start_idx:end_idx]
+    X = np.column_stack((np.ones_like(x_vals), x_vals)) # Adds the constant/intercept column
+    X_pinv = np.linalg.pinv(X) # Shape: (2, N_points)
+
     print('Fitting lagtimes between {:.1f} and {:.1f} ns'.format(diff.lagtimes[start_idx], diff.lagtimes[end_idx]))
 
     msd_boots = np.zeros((n_lagtimes, n_bootstraps))
     diff_boots = np.zeros(n_bootstraps)
-    for b in range(n_bootstraps):
-        rng = np.random.default_rng()
+    rng = np.random.default_rng()
+    for b in tqdm(range(n_bootstraps)):
         indices = rng.choice(n_waters, size=n_waters, replace=True)
         msd_boots[:, b] = diff.msds_by_particle[:, indices].mean(axis=1)
-        Y_boot = msd_boots[:, b][start_idx:end_idx]
-        ols_boot = sm.OLS(Y_boot, X)
-        res_boot = ols_boot.fit()
-        diff_boots[b] = res_boot.params[1] / 2 / diff.dimensionality
+        # Y_boot = msd_boots[:, b][start_idx:end_idx]
+        # ols_boot = sm.OLS(Y_boot, X)
+        # res_boot = ols_boot.fit()
+        # diff_boots[b] = res_boot.params[1] / 2 / diff.dimensionality
+
+    Y_boot = msd_boots[start_idx:end_idx, :]
+    coeffs = X_pinv @ Y_boot # Shape: (2, n_bootstraps)
+    slopes = coeffs[1, :]     # Index 1 is the slope (Index 0 is the intercept)
+    diff_boots = slopes / (2 * diff.dimensionality)
 
     msd_ci = stats.norm.interval(0.95, loc=msd_boots.mean(axis=1), scale=stats.sem(msd_boots, axis=1))
     diff_ci = stats.norm.interval(0.95, loc=diff_boots.mean(), scale=stats.sem(diff_boots))
@@ -69,21 +78,21 @@ def bootstrap_water_diffusion_coefficients(diff, n_bootstraps=1000, start_pct=0.
         plt.ylabel('Mean squared displacement (nm$^2$)')
         plt.legend(loc='upper left')
         plt.xlim(0, 1000)
-        plt.ylim(0, 2000)
+        plt.xscale('log')
+        plt.yscale('log')
+        # plt.ylim(0, 2000)
 
     return diff_boots.mean(), diff_ci
 
 
-def bootstrap_ion_diffusion_coefficients(diff, idx, n_bootstraps=1000, start_pct=0.1, end_pct=0.5, plot=False):
+def bootstrap_ion_diffusion_coefficients(diff, idx, n_bootstraps=1000, start_time=None, end_time=None, plot=False):
     '''Bootstrap ion diffusion coefficients from MSDs'''
 
     n_lagtimes = len(diff.lagtimes)
     n_ions = len(idx)
 
-    val = np.quantile(diff.lagtimes, start_pct)
-    start_idx = np.where(diff.lagtimes >= val)[0][0]
-    val = np.quantile(diff.lagtimes, end_pct)
-    end_idx = np.where(diff.lagtimes <= val)[0][-1]
+    start_idx = np.where(diff.lagtimes >= start_time)[0][0]
+    end_idx = np.where(diff.lagtimes <= end_time)[0][-1]
 
     X = diff.lagtimes[start_idx:end_idx]
     X = sm.add_constant(X)
@@ -91,7 +100,7 @@ def bootstrap_ion_diffusion_coefficients(diff, idx, n_bootstraps=1000, start_pct
 
     msd_boots = np.zeros((n_lagtimes, n_bootstraps))
     diff_boots = np.zeros(n_bootstraps)
-    for b in range(n_bootstraps):
+    for b in tqdm(range(n_bootstraps)):
         rng = np.random.default_rng()
         indices = rng.choice(idx, size=n_ions, replace=True)
         msd_boots[:, b] = diff.msds_by_particle[:, indices].mean(axis=1)
@@ -128,16 +137,17 @@ def bootstrap_ion_diffusion_coefficients(diff, idx, n_bootstraps=1000, start_pct
         plt.ylabel('Mean squared displacement (nm$^2$)')
         plt.legend(loc='upper left')
         plt.xlim(0, 1000)
-        plt.ylim(0, 20)
+        # plt.ylim(0, 20)
+        plt.xscale('log')
+        plt.yscale('log')
 
     return diff_boots.mean(), diff_ci
 
 
 if __name__ == '__main__':
 
-    label = 'NaOCl'
-    start_pct = 0.1
-    end_pct = 0.5
+    start_time = 500
+    end_time = 900
 
     # Load water diffusion coefficient objects
     diff = load_pickle('diffusion_coefficient_unrestricted.pkl')
@@ -146,20 +156,20 @@ if __name__ == '__main__':
     print('\nDiffusion coefficients for all waters:')
     D_unrestricted, CI_unrestricted = bootstrap_water_diffusion_coefficients(diff, 
                                                                              n_bootstraps=1000, 
-                                                                             start_pct=start_pct, 
-                                                                             end_pct=end_pct,
-                                                                             plot=False)
+                                                                             start_time=start_time, 
+                                                                             end_time=end_time,
+                                                                             plot=True)
     
-    # Load ion diffusion coefficient object and MDAnalysis universe
-    diff_ion = load_pickle('ion_diffusion_coefficient.pkl')
+    # # Load ion diffusion coefficient object and MDAnalysis universe
+    # diff_ion = load_pickle('ion_diffusion_coefficient.pkl')
 
-    # Get bootstrapped diffusion coefficients for ions    
-    print('\nDiffusion coefficients for all ions:')
-    D_ion_unrestricted, CI_ion_unrestricted = bootstrap_ion_diffusion_coefficients(diff_ion, 
-                                                                         np.arange(len(diff_ion.cation)), 
-                                                                         n_bootstraps=1000, 
-                                                                         start_pct=start_pct, 
-                                                                         end_pct=end_pct,
-                                                                         plot=False)
+    # # Get bootstrapped diffusion coefficients for ions    
+    # print('\nDiffusion coefficients for all ions:')
+    # D_ion_unrestricted, CI_ion_unrestricted = bootstrap_ion_diffusion_coefficients(diff_ion, 
+    #                                                                      np.arange(len(diff_ion.cation)), 
+    #                                                                      n_bootstraps=1000, 
+    #                                                                      start_time=start_time, 
+    #                                                                      end_time=end_time,
+    #                                                                      plot=False)
     
     plt.show()

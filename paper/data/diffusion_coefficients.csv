@@ -1,0 +1,4 @@
+treatment,diffusion_coefficient_nm2_per_ns,bootstrap_95ci
+Pristine,0.51365332,0.00048705
+NaOCl,0.32836530,0.00050384
+NaOCl + NaOH,0.34982959,0.00050279
