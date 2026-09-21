@@ -107,7 +107,7 @@ def create_TMC_fragments(universe):
 
 
 def determine_membrane_bounds(universe, weighted='number', return_hist=False):
-    '''Determine membrane bounds based on intersection of the polymer desnity and water density profiles'''
+    '''Determine membrane bounds based on intersection of the polymer density and water density profiles'''
 
     water = universe.select_atoms('resname SOL')
     polymer = universe.select_atoms('resname PA*')
