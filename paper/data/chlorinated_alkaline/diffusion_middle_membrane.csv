@@ -1,2 +1,2 @@
-Dimensionality,D_A2_per_ps,D_cm2_per_s,R_squared,Max_Fit_Tau_ps,Fit_Fraction_Used
-3,0.00045563402690179726,4.556340269017973e-08,0.9865172864949237,499500.0,0.5
+Dimensionality,D_A2_per_ps,D_std_A2_per_ps,D_cm2_per_s,Start_Fit_Tau_ps,End_Fit_Tau_ps,Fit_Fraction_Used
+3,0.0004191507736721857,3.2761536603057175e-05,4.191507736721857e-08,149500.0,299000.0,0.14992503748125938
