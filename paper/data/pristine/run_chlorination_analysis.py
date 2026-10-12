@@ -109,23 +109,42 @@ def create_TMC_fragments(universe):
 def determine_membrane_bounds(universe, weighted='number', return_hist=False):
     '''Determine membrane bounds based on intersection of the polymer density and water density profiles'''
 
-    water = universe.select_atoms('resname SOL')
-    polymer = universe.select_atoms('resname PA*')
+    if weighted == "number":
+        water = universe.select_atoms('(resname SOL) and (not element H)')
+        polymer = universe.select_atoms('(resname PA*) and (not element H)')
+    elif weighted == "mass":
+        water = universe.select_atoms('resname SOL')
+        polymer = universe.select_atoms('resname PA*')
+
+    # duplicate in z for consistent PBC
+    water_pos = np.zeros(water.n_atoms*2)
+    polymer_pos = np.zeros(polymer.n_atoms*2)
 
     max_dims = max([ts.dimensions[2] for ts in u.trajectory])
-
     bin_width = 1
+    bins = np.arange(0, max_dims+bin_width, bin_width)
+    bin_centers = 0.5 * (bins[:-1] + bins[1:])
+
     water_hist = np.histogram([], bins=np.arange(0, max_dims+bin_width, bin_width))[0].astype(np.float64)
     polymer_hist = np.histogram([], bins=np.arange(0, max_dims+bin_width, bin_width))[0].astype(np.float64)
+    nonzero_frames = [
+        np.histogram([], bins=np.arange(0, max_dims+bin_width, bin_width))[0],
+        np.histogram([], bins=np.arange(0, max_dims+bin_width, bin_width))[0]
+    ]
 
     for ts in tqdm(universe.trajectory):
+        water_pos[:water.n_atoms] = water.positions[:,2]
+        water_pos[water.n_atoms:] = water.positions[:,2] + ts.dimensions[2]
+        polymer_pos[:polymer.n_atoms] = polymer.positions[:,2]
+        polymer_pos[polymer.n_atoms:] = polymer.positions[:,2] + ts.dimensions[2]
+
         # Recalculate histograms
-        hist, b = np.histogram(water.positions[:,2], bins=np.arange(0, max_dims+bin_width, bin_width), weights=water.masses if weighted == 'mass' else None)
+        hist, b = np.histogram(water_pos, bins=np.arange(0, max_dims+bin_width, bin_width), weights=water.masses if weighted == 'mass' else None)
         hist = hist.astype(np.float64) / (bin_width * ts.dimensions[0] * ts.dimensions[1])
         water_hist += hist
         water_bin_centers = 0.5 * (b[:-1] + b[1:])
 
-        hist, b = np.histogram(polymer.positions[:,2], bins=np.arange(0, max_dims+bin_width, bin_width), weights=polymer.masses if weighted == 'mass' else None)
+        hist, b = np.histogram(polymer_pos, bins=np.arange(0, max_dims+bin_width, bin_width), weights=polymer.masses if weighted == 'mass' else None)
         hist = hist.astype(np.float64) / (bin_width * ts.dimensions[0] * ts.dimensions[1])
         polymer_hist += hist
 
@@ -160,7 +179,7 @@ def determine_membrane_bounds(universe, weighted='number', return_hist=False):
     print(f'Membrane bounds (Z): {membrane_bounds}')
 
     if return_hist:
-        return membrane_bounds, water_hist, polymer_hist
+        return membrane_bounds, water_hist, polymer_hist, bin_centers
     else:
         return membrane_bounds
 
@@ -578,20 +597,26 @@ if __name__ == "__main__":
 
     if analysis_to_run['density_profiles']:
 
-        # calculate density profiles and average densities
-        print('\nCalculating density profiles and average densities')
-        bins, water_density_profile, polymer_density_profile, density_df = calculate_density(u, bin_width=1)
+        # # calculate density profiles and average densities
+        # print('\nCalculating density profiles and average densities')
+        # bins, water_density_profile, polymer_density_profile, density_df = calculate_density(u, bin_width=1)
 
-        # save both profiles and time series to CSV
-        density_csv = path + 'density.csv'
-        density_df.to_csv(density_csv, index=False)
-        print(f'Wrote average densities to {density_csv}')
+        # # save both profiles and time series to CSV
+        # density_csv = path + 'density.csv'
+        # density_df.to_csv(density_csv, index=False)
+        # print(f'Wrote average densities to {density_csv}')
 
         # density_profile_csv = path + 'density_profiles.csv'
-        # density_profile_out = np.column_stack((bins[1:], water_density_profile, polymer_density_profile))
+        # density_profile_out = np.column_stack((bins, water_density_profile, polymer_density_profile))
         # np.savetxt(density_profile_csv, density_profile_out, delimiter=',', header='z,water_density_profile,polymer_density_profile', comments='', fmt='%.6f')
         # print(f'Wrote density profiles to {density_profile_csv}')
 
+        membrane_bounds, water_density_profile, polymer_density_profile, bins = determine_membrane_bounds(u, weighted='number', return_hist=True)
+
+        density_profile_csv = path + 'density_profiles_heavy_atoms.csv'
+        density_profile_out = np.column_stack((bins, water_density_profile, polymer_density_profile))
+        np.savetxt(density_profile_csv, density_profile_out, delimiter=',', header='z,water_density_profile,polymer_density_profile', comments='', fmt='%.6f')
+        print(f'Wrote density profiles to {density_profile_csv}')
 
     if analysis_to_run['coordination']:
 
